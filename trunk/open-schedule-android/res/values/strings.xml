@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenSchedule</string>
+    <string name="title_event_details">Event Details</string>
+    <string name="title_event_description">Event Description</string>
+    <string name="title_event_sessions_filtered">Filtered Sessions</string>
+    <string name="title_event_sessions_schedule">Session Schedule</string>
+    <string name="title_event_sessions_current">Current Sessions</string>
+    <string name="title_event_sessions_upcoming">Upcoming Sessions</string>
+    <string name="title_event_sessions_my_favorites">My Favorite Sessions</string>
+    <string name="title_event_sessions_conference_favorites">Conference Favorite Sessions</string>
+    <string name="title_event_sessions_by_day">Sessions by Day</string>
+    <string name="title_event_session_details">Session Details</string>
+    <string name="title_event_session_description">Session Description</string>
+
+	<string name="title_published_events_select">Select Event</string>
+	
+	<string name="event_comment_form_label_text_title">Add Comment for Event</string>
+	<string name="session_comment_form_label_text_title">Add Comment for Session</string>
+
+	<string name="comment_form_label_text_name">Name: (optional)</string>
+	<string name="comment_form_label_hint_name">Enter your name</string>
+	<string name="comment_form_label_text_email">Email: (optional)</string>
+	<string name="comment_form_label_hint_email">Enter email address</string>
+	<string name="comment_form_label_text_comment">Comments:</string>
+	
+	<string name="form_button_label_text_submit">Submit</string>
+	<string name="form_button_label_text_cancel">Cancel</string>
+	<string name="form_button_label_text_clear">Clear</string>
+
+    <string-array name="event_details_options_array">
+        <item>Description</item>
+        <item>Filtered Sessions</item>
+        <item>Session Schedule</item>
+        <item>Map</item>
+    </string-array>
+    
+    <string-array name="event_filtered_sessions_options_array">
+    	<item>Current</item>
+    	<item>Upcoming</item>
+    </string-array>
+    
+    <string-array name="comments_options_array">
+    	<item>Add Comment</item>
+    	<item>View Comments</item>
+    </string-array>
+
+    <string-array name="event_session_details_options_array">
+        <item>Description</item>
+    </string-array>
+
+    <string-array name="session_options_array">
+        <item>Description</item>
+        <item>Speakers</item>
+        <item>View Comments</item>
+        <item>Tweet</item>
+        <item>Add to Calendar</item>
+		<item>Add Comment</item>
+    </string-array>
+
+    <string-array name="speaker_options_array">
+        <item>Bio</item>
+        <item>Web Site</item>
+        <item>Contact</item>
+    </string-array>
+
+    <string-array name="venue_options_array">
+        <item>Web Site</item>
+        <item>Call</item>
+        <item>Contact</item>
+        <item>Navigate</item>
+    </string-array>
+
+</resources>
