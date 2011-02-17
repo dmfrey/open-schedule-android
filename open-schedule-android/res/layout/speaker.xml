@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/MainTabLayout">
+	
+	<ScrollView
+		style="@style/ScrollView">
+
+		<RelativeLayout
+			style="@style/ScrollableContainerLayout">
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+			    android:orientation="vertical"
+	    		android:paddingBottom="20dp">
+	
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/speaker_name_text_view" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/speaker_email_text_view" />
+
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/speaker_web_site_text_view" />
+
+			</LinearLayout>
+			    		
+    		<ListView
+    			style="@style/MenuListView"
+    			android:layout_alignParentBottom="true"
+    			android:id="@+id/speaker_details_menu"
+    			android:entries="@array/speaker_options_array" />
+
+		</RelativeLayout>
+		
+	</ScrollView>
+	
+</FrameLayout>
