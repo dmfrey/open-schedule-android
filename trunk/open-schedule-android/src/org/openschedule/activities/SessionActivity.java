@@ -12,6 +12,7 @@ import org.openschedule.R;
 import org.openschedule.activities.twitter.TwitterActivity;
 import org.openschedule.controllers.NavigationManager;
 import org.openschedule.domain.Block;
+import org.openschedule.domain.Day;
 import org.openschedule.domain.Event;
 import org.openschedule.domain.Schedule;
 import org.openschedule.domain.Speaker;
@@ -59,12 +60,13 @@ public class SessionActivity extends Activity {
 		listView.setOnItemClickListener( new OnItemClickListener() {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 		    	
+		    	Day day = SharedDataManager.getCurrentDay();
       			Block block = SharedDataManager.getCurrentBlock();
 
       			Calendar now = new GregorianCalendar();
       			
   				Calendar startTime = new GregorianCalendar();
-  				startTime.setTime( block.getDate() );
+  				startTime.setTime( day.getDate() );
   				StringTokenizer st = new StringTokenizer( block.getLabel().getName(), ":" );
   				int hour = Integer.parseInt( st.nextToken() );
   				int minute = Integer.parseInt( st.nextToken() );
