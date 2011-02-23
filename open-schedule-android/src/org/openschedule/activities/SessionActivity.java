@@ -254,6 +254,7 @@ public class SessionActivity extends Activity {
 	private void refreshSession() {
 		Log.d( TAG, "Refreshing Session : enter" );
 
+		Day day = SharedDataManager.getCurrentDay();
 		Block block = SharedDataManager.getCurrentBlock();
 		if( null == block ) {
 			Log.d( TAG, "Refreshing Session : exit, no block" );
@@ -273,10 +274,10 @@ public class SessionActivity extends Activity {
 			sessionNameTextView.setText( block.getSession().getName() );
 		}
 		
-		if( null != block.getDate() ) {
+		if( null != day.getDate() ) {
 			Log.d( TAG, "Refreshing Session : block date is not null" );
 			
-			String time = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( block.getDate() );
+			String time = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( day.getDate() );
 			if( null != block.getLabel() ) {
 				Log.d( TAG, "Refreshing Session : block label is not null" );
 				
