@@ -29,7 +29,6 @@ import java.util.List;
 import org.openschedule.R;
 import org.openschedule.controllers.EventsController;
 import org.openschedule.controllers.NavigationManager;
-import org.openschedule.domain.Block;
 import org.openschedule.domain.Event;
 import org.openschedule.util.Prefs;
 import org.openschedule.util.SharedDataManager;
@@ -181,8 +180,12 @@ public class InfoActivity extends Activity {
 		} else {
 			Log.v( TAG, "Refreshing Event : selected event stored in preferences" );
 			
-			Event event = EventsController.getEvent( this, selectedEvent );
-			SharedDataManager.setCurrentEvent( event );
+			if( null == SharedDataManager.getCurrentEvent() ) {
+				Log.v( TAG, "Refreshing Event : no currentEvent stored in SharedDataManager, get the latest." );
+
+				Event event = EventsController.getEvent( this, selectedEvent );
+				SharedDataManager.setCurrentEvent( event );
+			}
 			
 			updateView();
 		}

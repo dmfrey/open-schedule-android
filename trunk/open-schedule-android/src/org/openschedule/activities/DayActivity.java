@@ -35,9 +35,6 @@ import org.openschedule.util.SharedDataManager;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -91,13 +88,6 @@ public class DayActivity extends ListActivity {
 		Log.d( TAG, "onListItemClick : exit" );
 	}
 
-//	@Override
-//	public void onCreateContextMenu( ContextMenu menu, View v, ContextMenuInfo menuInfo ) {
-//	  super.onCreateContextMenu( menu, v, menuInfo );
-//	  MenuInflater inflater = getMenuInflater();
-//	  inflater.inflate( R.menu.day_context_menu, menu );
-//	}
-	
 	//***************************************
     // Private methods
     //***************************************
