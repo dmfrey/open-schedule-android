@@ -82,16 +82,6 @@ public class EventActivity extends ListActivity {
 		Log.d( TAG, "onStart : exit" );
 	}
 
-	@Override
-	public void onResume() {
-	    Log.d( TAG, "onResume : enter" );
-
-	    super.onResume();
-		refreshEvent();
-
-		Log.d( TAG, "onResume : exit" );
-	}
-
 	//***************************************
     // ListActivity methods
     //***************************************
