@@ -28,6 +28,11 @@
 	<string name="form_button_label_text_cancel">Cancel</string>
 	<string name="form_button_label_text_clear">Clear</string>
 
+	<string name="about_header">About OpenSchedule</string>
+	<string name="about_description">OpenSchedule is open source software and completely free to use.  Code can be found at code.google.com in the projects open-schedule and open-schedule-android.</string>
+	<string name="about_thanks_header">Thanks to...</string>
+	<string name="about_thanks_description"></string>
+
     <string-array name="event_details_options_array">
         <item>Description</item>
         <item>Filtered Sessions</item>

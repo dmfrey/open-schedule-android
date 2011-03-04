@@ -167,6 +167,11 @@ public class InfoActivity extends Activity {
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
 	    	return true;
+	    case R.id.events_menu_about:
+	    	NavigationManager.startActivity( this, AboutActivity.class );
+
+	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
+	    	return true;
 	    default:
 		    Log.d( TAG, "onOptionsItemSelected : exit, default option selected" );
 	        return super.onOptionsItemSelected( item );
