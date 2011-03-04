@@ -24,7 +24,6 @@ package org.openschedule.domain;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -60,10 +59,14 @@ public class Day {
 	}
 
 	public Date getDate() {
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime( date );
 		cal.add( Calendar.DATE, 1 );
-		
+				
+		cal.set( Calendar.HOUR_OF_DAY, 0 );
+		cal.set( Calendar.MINUTE, 0 );
+		cal.set( Calendar.SECOND, 0 );
+
 		return cal.getTime();
 	}
 

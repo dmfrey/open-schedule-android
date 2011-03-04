@@ -23,7 +23,6 @@ package org.openschedule.domain;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -57,7 +56,7 @@ public class Block {
 	}
 
 	public Date getDate() {
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime( date );
 		cal.add( Calendar.DATE, 1 );
 		

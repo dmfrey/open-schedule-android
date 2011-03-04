@@ -23,7 +23,6 @@ package org.openschedule.activities;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
 import org.openschedule.R;
@@ -77,13 +76,14 @@ public class SessionActivity extends Activity {
 		
 		listView.setOnItemClickListener( new OnItemClickListener() {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
+	      		Log.d( TAG, "onItemClick : enter" );
 		    	
 		    	Day day = SharedDataManager.getCurrentDay();
       			Block block = SharedDataManager.getCurrentBlock();
 
-      			Calendar now = new GregorianCalendar();
+      			Calendar now = Calendar.getInstance();
       			
-  				Calendar startTime = new GregorianCalendar();
+  				Calendar startTime = Calendar.getInstance();
   				startTime.setTime( day.getDate() );
   				StringTokenizer st = new StringTokenizer( block.getLabel().getName(), ":" );
   				int hour = Integer.parseInt( st.nextToken() );
@@ -91,9 +91,14 @@ public class SessionActivity extends Activity {
   				startTime.set( Calendar.HOUR_OF_DAY, hour );
   				startTime.set( Calendar.MINUTE, minute );
 
-  				Calendar endTime = new GregorianCalendar();
+  				Calendar endTime = Calendar.getInstance();
   				endTime.setTime( startTime.getTime() );
   				endTime.add( Calendar.MINUTE, block.getDuration() );
+
+				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
+				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
+				Log.d( TAG, "endTime=" + endTime.get( Calendar.YEAR ) + "-" + ( endTime.get( Calendar.MONTH ) + 1 ) + "-" + endTime.get( Calendar.DATE ) + " " + endTime.get( Calendar.HOUR_OF_DAY ) + ":" + endTime.get( Calendar.MINUTE ) + ":" + endTime.get( Calendar.SECOND ) );
+				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
 
   				switch( position ) {
 		    		case 0:
@@ -130,14 +135,20 @@ public class SessionActivity extends Activity {
 			      		Log.d( TAG, "send tweet" );
 
 	      				if( now.before( startTime ) ) {
+	      				    Log.d( TAG, "sendTweet : tweeting is disabled, session has not started yet." );
+
 		      				Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, tweeting is only available during the session.", Toast.LENGTH_LONG );
 		      				toast.setGravity( Gravity.CENTER, 0, 0 );
 		      				toast.show();
 	      				} else if( now.after( endTime ) ) {
+	      				    Log.d( TAG, "sendTweet : tweeting is disabled, session has ended." );
+
 		      				Toast toast = Toast.makeText( view.getContext(), "Session has ended, tweeting is only available during the session.", Toast.LENGTH_LONG );
 		      				toast.setGravity( Gravity.CENTER, 0, 0 );
 		      				toast.show();
 	      				} else {
+	      				    Log.d( TAG, "sendTweet : tweeting is enabled, session in progress." );
+
 	      					NavigationManager.startActivity( view.getContext(), TwitterActivity.class );
 	      				}
 			      		break;
@@ -226,10 +237,14 @@ public class SessionActivity extends Activity {
 			      		Log.d( TAG, "add comment" );
 			      		
 	      				if( now.before( startTime ) ) {
+	      				    Log.d( TAG, "sendTweet : add comment is disabled, session has not started yet." );
+
 		      				Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, Comments are only available after the session has started.", Toast.LENGTH_LONG );
 		      				toast.setGravity( Gravity.CENTER, 0, 0 );
 		      				toast.show();
 	      				} else {
+	      				    Log.d( TAG, "sendTweet : adding comment is enabled, session has started or is completed." );
+
 	      					NavigationManager.startActivity( view.getContext(), SessionCommentFormActivity.class );
 	      				}
 	      				
@@ -238,7 +253,10 @@ public class SessionActivity extends Activity {
 			      		Log.d( TAG, "default option" );
 			      		break;
 		    	}
+
+  				Log.d( TAG, "onItemClick : exit" );
 		    }
+
 		});
 
 		Log.d( TAG, "onCreate : exit" );
