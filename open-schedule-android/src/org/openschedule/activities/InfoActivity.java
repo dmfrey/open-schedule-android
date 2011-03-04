@@ -23,7 +23,6 @@ package org.openschedule.activities;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.openschedule.R;
@@ -87,21 +86,29 @@ public class InfoActivity extends Activity {
 		    	
       			Event event = SharedDataManager.getCurrentEvent();
 
-      			Calendar now = new GregorianCalendar();
+      			Calendar now = Calendar.getInstance();
       			
-  				Calendar startTime = new GregorianCalendar();
+  				Calendar startTime = Calendar.getInstance();
   				startTime.setTime( event.getStartDate() );
-
+  				
+				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
+				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
+				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
+  				
   				switch( position ) {
 		    		case 0:
 		    			Log.d( TAG, "add comment" );
 
-		    			if( now.before( startTime ) ) {
-		      				Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
+		    			if( now.after( startTime ) ) {
+			    			Log.d( TAG, "adding comments are enabled, the event has started" );
+
+			    			NavigationManager.startActivity( view.getContext(), EventCommentFormActivity.class );
+		    			} else {
+			    			Log.d( TAG, "adding comments is disabled, the event has not started" );
+
+			    			Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
 		      				toast.setGravity( Gravity.CENTER, 0, 0 );
 		      				toast.show();
-		    			} else {
-		    				NavigationManager.startActivity( view.getContext(), EventCommentFormActivity.class );
 		    			}
 		    			
 		    			break;

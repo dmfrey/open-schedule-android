@@ -23,7 +23,6 @@ package org.openschedule.domain;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -91,9 +90,13 @@ public class Event {
 	}
 
 	public Date getPublishDate() {
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime( publishDate );
 		cal.add( Calendar.DATE, 1 );
+		
+		cal.set( Calendar.HOUR_OF_DAY, 0 );
+		cal.set( Calendar.MINUTE, 0 );
+		cal.set( Calendar.SECOND, 0 );
 		
 		return cal.getTime();
 	}
@@ -103,9 +106,13 @@ public class Event {
 	}
 
 	public Date getStartDate() {
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime( startDate );
 		cal.add( Calendar.DATE, 1 );
+		
+		cal.set( Calendar.HOUR_OF_DAY, 0 );
+		cal.set( Calendar.MINUTE, 0 );
+		cal.set( Calendar.SECOND, 0 );
 		
 		return cal.getTime();
 	}
@@ -115,9 +122,13 @@ public class Event {
 	}
 
 	public Date getEndDate() {
-		Calendar cal = new GregorianCalendar();
+		Calendar cal = Calendar.getInstance();
 		cal.setTime( endDate );
 		cal.add( Calendar.DATE, 1 );
+		
+		cal.set( Calendar.HOUR_OF_DAY, 23 );
+		cal.set( Calendar.MINUTE, 59 );
+		cal.set( Calendar.SECOND, 59 );
 		
 		return cal.getTime();
 	}
