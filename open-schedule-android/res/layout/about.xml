@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/MainTabLayout">
+	
+	<ScrollView
+		style="@style/ScrollView">
+
+		<RelativeLayout
+			style="@style/ScrollableContainerLayout">
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+			    android:orientation="vertical"
+	    		android:paddingBottom="20dp">
+	
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/about_header_text_view"
+					android:text="@string/about_header" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_description_text_view"
+			    	android:text="@string/about_description" />
+
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/about_thanks_header_text_view"
+					android:text="@string/about_thanks_header" />
+
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_thanks_description_site_text_view"
+					android:text="@string/about_thanks_description" />
+
+			</LinearLayout>
+			    		
+		</RelativeLayout>
+		
+	</ScrollView>
+	
+</FrameLayout>

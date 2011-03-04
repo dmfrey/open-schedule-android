@@ -8,4 +8,8 @@
 		android:id="@+id/events_menu_refresh"
 		android:title="Refresh" />
 
+    <item
+		android:id="@+id/events_menu_about"
+		android:title="About" />
+
 </menu>
