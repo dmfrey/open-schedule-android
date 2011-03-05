@@ -35,7 +35,7 @@ import org.openschedule.domain.Block;
 import org.openschedule.domain.Event;
 import org.openschedule.util.SharedDataManager;
 import org.openschedule.util.TwitterPrefs;
-import org.springframework.social.twitter.TwitterOperations;
+import org.springframework.social.twitter.TwitterTemplate;
 
 import android.app.Activity;
 import android.content.Context;
@@ -107,6 +107,12 @@ public class TwitterActivity extends Activity {
 
 				Writer result = new StringWriter();
 				e.printStackTrace( new PrintWriter( result ) );
+
+				Toast toast = Toast.makeText( this, "Twitter is unavailable at this time, please try again later.", Toast.LENGTH_LONG );
+				toast.setGravity( Gravity.CENTER, 0, 0 );
+				toast.show();
+				
+				finish();
 			}
 		}
 
@@ -170,7 +176,7 @@ public class TwitterActivity extends Activity {
 	private void postTweet() {
 		Log.v( TAG, "postTweet : enter" );
 		
-		TwitterOperations twitter = TwitterPrefs.getTwitterOperations( _settings );
+		TwitterTemplate twitter = TwitterPrefs.getTwitterTemplate( _settings );
 		
 		String greeting = "I am attending: ";
 		

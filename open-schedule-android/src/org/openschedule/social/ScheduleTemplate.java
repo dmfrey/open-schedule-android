@@ -60,7 +60,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 		this.baseUrl = baseUrl;
 	}
 
-	@Override
 	public List<Event> getPublishedEvents() {
 		Log.d( TAG, "getPublishedEvents : enter" );
 		
@@ -75,7 +74,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 	/* (non-Javadoc)
 	 * @see org.openschedule.social.ScheduleOperations#getEvent(java.lang.String)
 	 */
-	@Override
 	public Event getEvent( String shortName ) {
 		Log.d( TAG, "getEvent : enter" );
 		
@@ -89,7 +87,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 				new HttpEntity<Object>( jsonAcceptingHeaders ), Event.class, shortName ).getBody();
 	}
 
-	@Override
 	public void addEventComment( String shortName, Comment comment ) {
 		Log.d( TAG, "addEventComment : enter" );
 		
@@ -109,7 +106,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 		Log.d( TAG, "addEventComment : exit" );
 	}
 
-	@Override
 	public List<Comment> getEventComments( String shortName ) {
 		Log.d( TAG, "getEventComments : enter" );
 		
@@ -123,7 +119,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 				new HttpEntity<Object>( jsonAcceptingHeaders ), Comment[].class, shortName ).getBody() );
 	}
 
-	@Override
 	public void addBlockComment( String shortName, Integer dayId, Integer scheduleId, Integer blockId, Comment comment ) {
 		Log.d( TAG, "addSessionComment : enter" );
 		
@@ -143,7 +138,6 @@ public class ScheduleTemplate implements ScheduleOperations {
 		Log.d( TAG, "addSessionComment : exit" );
 	}
 
-	@Override
 	public List<Comment> getBlockComments( String shortName, Integer dayId, Integer scheduleId, Integer blockId ) {
 		Log.d( TAG, "getSessionComments : enter" );
 		
