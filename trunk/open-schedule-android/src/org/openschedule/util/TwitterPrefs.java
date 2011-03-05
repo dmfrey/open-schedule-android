@@ -21,7 +21,6 @@
  */
 package org.openschedule.util;
 
-import org.springframework.social.twitter.TwitterOperations;
 import org.springframework.social.twitter.TwitterTemplate;
 
 import android.content.SharedPreferences;
@@ -44,9 +43,7 @@ public class TwitterPrefs {
 	private static final String API_KEY = "MZ3VfGgAZpOgZeZru7zlQ";
 	private static final String API_SECRET = "ALtxkb5XXQqW2LpNhqVrCNEmrkmsQQcJeLeO4wqxg";
 
-	public static final String CALLBACK_URI_STRING = "x-org-dmfrey-schedule://twitter-response";
-
-	private static TwitterOperations twitterOperations;
+	public static final String CALLBACK_URI_STRING = "x-org-openschedule://twitter-response";
 
 	public static void saveRequestInformation( final SharedPreferences settings, final String token, final String secret ) {
 		SharedPreferences.Editor editor = settings.edit();
@@ -102,7 +99,6 @@ public class TwitterPrefs {
 		editor.remove( ACCESS_TOKEN );
 		editor.remove( ACCESS_TOKEN_SECRET );
 		editor.commit();	
-		twitterOperations = null;
 	}
 	
 	public static boolean isLoggedIn( final SharedPreferences settings ) {
@@ -130,13 +126,9 @@ public class TwitterPrefs {
 		return Uri.parse( CALLBACK_URI_STRING );
 	}
 
-	public static TwitterOperations getTwitterOperations( final SharedPreferences settings ) {
-		if( twitterOperations == null ) {
-			String[] tokenAndSecret = TwitterPrefs.getAccessTokenAndSecret( settings );
-			twitterOperations = new TwitterTemplate( API_KEY, API_SECRET, tokenAndSecret[0], tokenAndSecret[1] );
-		}
-		
-		return twitterOperations;
+	public static TwitterTemplate getTwitterTemplate( final SharedPreferences settings ) {
+		String[] tokenAndSecret = TwitterPrefs.getAccessTokenAndSecret( settings );
+		return new TwitterTemplate( API_KEY, API_SECRET, tokenAndSecret[ 0 ], tokenAndSecret[ 1 ] );
 	}
 
 }
