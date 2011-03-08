@@ -113,9 +113,14 @@ public class InfoActivity extends Activity {
 		    			
 		    			break;
 			      	case 1:
-			      		Log.d( TAG, "view comment" );
+			      		Log.d( TAG, "view comments" );
 
 		    			NavigationManager.startActivity( view.getContext(), EventCommentsActivity.class );
+			      		break;
+			      	case 2:
+			      		Log.d( TAG, "view notifications" );
+
+		    			NavigationManager.startActivity( view.getContext(), NotificationsActivity.class );
 			      		break;
 			      	default:
 			      		Log.d( TAG, "default option" );
@@ -257,12 +262,17 @@ public class InfoActivity extends Activity {
 		
 		Event event = SharedDataManager.getCurrentEvent();
 		
-		eventNameTextView.setText( event.getName() );
-		
-		String startDate = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( event.getStartDate() );
-		String endDate = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( event.getEndDate() );
-		eventDatesTextView.setText( startDate + " - " + endDate );
+		if( null != event ) {
+			eventNameTextView.setText( event.getName() );
 
+			String startDate = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( event.getStartDate() );
+			String endDate = new SimpleDateFormat( Prefs.DATE_FORMAT ).format( event.getEndDate() );
+			eventDatesTextView.setText( startDate + " - " + endDate );
+		} else {
+			eventNameTextView.setText( "Event is unavailable at this time." );
+			eventDatesTextView.setText( "" );
+		}
+		
 		Log.v( TAG, "updateView : exit" );
 	}
 	

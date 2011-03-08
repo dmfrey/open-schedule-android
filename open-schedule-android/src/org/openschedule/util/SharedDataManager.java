@@ -26,6 +26,7 @@ import java.util.List;
 import org.openschedule.domain.Block;
 import org.openschedule.domain.Day;
 import org.openschedule.domain.Event;
+import org.openschedule.domain.Notification;
 import org.openschedule.domain.Schedule;
 import org.openschedule.domain.Speaker;
 import org.openschedule.domain.Venue;
@@ -44,6 +45,9 @@ public class SharedDataManager {
 	private static Speaker currentSpeaker;
 	private static Venue currentVenue;
 
+	private static List<Notification> currentNotifications;
+	private static Notification currentNotification;
+	
 	public static List<Event> getCurrentEvents() {
 		return currentEvents;
 	}
@@ -98,6 +102,34 @@ public class SharedDataManager {
 
 	public static void setCurrentVenue( Venue currentVenue ) {
 		SharedDataManager.currentVenue = currentVenue;
+	}
+
+	/**
+	 * @return the currentNotifications
+	 */
+	public static List<Notification> getCurrentNotifications() {
+		return currentNotifications;
+	}
+
+	/**
+	 * @param currentNotifications the currentNotifications to set
+	 */
+	public static void setCurrentNotifications( List<Notification> currentNotifications ) {
+		SharedDataManager.currentNotifications = currentNotifications;
+	}
+
+	/**
+	 * @return the currentNotification
+	 */
+	public static Notification getCurrentNotification() {
+		return currentNotification;
+	}
+
+	/**
+	 * @param currentNotification the currentNotification to set
+	 */
+	public static void setCurrentNotification( Notification currentNotification ) {
+		SharedDataManager.currentNotification = currentNotification;
 	}
 	
 }

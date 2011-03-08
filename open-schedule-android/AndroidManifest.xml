@@ -93,6 +93,14 @@
 			android:screenOrientation="portrait" />
 
 		<activity 
+			android:name="org.openschedule.activities.NotificationsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.NotificationDetailsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
 			android:name="org.openschedule.activities.twitter.TwitterActivity"
 			android:screenOrientation="portrait">
 			<intent-filter>
