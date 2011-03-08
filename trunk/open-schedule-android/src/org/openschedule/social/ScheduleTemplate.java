@@ -26,6 +26,7 @@ import java.util.List;
 
 import org.openschedule.domain.Comment;
 import org.openschedule.domain.Event;
+import org.openschedule.domain.Notification;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -60,6 +61,9 @@ public class ScheduleTemplate implements ScheduleOperations {
 		this.baseUrl = baseUrl;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#getPublishedEvents()
+	 */
 	public List<Event> getPublishedEvents() {
 		Log.d( TAG, "getPublishedEvents : enter" );
 		
@@ -87,6 +91,9 @@ public class ScheduleTemplate implements ScheduleOperations {
 				new HttpEntity<Object>( jsonAcceptingHeaders ), Event.class, shortName ).getBody();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#addEventComment(java.lang.String, org.openschedule.domain.Comment)
+	 */
 	public void addEventComment( String shortName, Comment comment ) {
 		Log.d( TAG, "addEventComment : enter" );
 		
@@ -106,6 +113,9 @@ public class ScheduleTemplate implements ScheduleOperations {
 		Log.d( TAG, "addEventComment : exit" );
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#getEventComments(java.lang.String)
+	 */
 	public List<Comment> getEventComments( String shortName ) {
 		Log.d( TAG, "getEventComments : enter" );
 		
@@ -119,6 +129,9 @@ public class ScheduleTemplate implements ScheduleOperations {
 				new HttpEntity<Object>( jsonAcceptingHeaders ), Comment[].class, shortName ).getBody() );
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#addBlockComment(java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer, org.openschedule.domain.Comment)
+	 */
 	public void addBlockComment( String shortName, Integer dayId, Integer scheduleId, Integer blockId, Comment comment ) {
 		Log.d( TAG, "addSessionComment : enter" );
 		
@@ -138,6 +151,9 @@ public class ScheduleTemplate implements ScheduleOperations {
 		Log.d( TAG, "addSessionComment : exit" );
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#getBlockComments(java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.Integer)
+	 */
 	public List<Comment> getBlockComments( String shortName, Integer dayId, Integer scheduleId, Integer blockId ) {
 		Log.d( TAG, "getSessionComments : enter" );
 		
@@ -151,12 +167,28 @@ public class ScheduleTemplate implements ScheduleOperations {
 				new HttpEntity<Object>( jsonAcceptingHeaders ), Comment[].class, shortName, dayId, scheduleId, blockId ).getBody() );
 	}
 
+	/* (non-Javadoc)
+	 * @see org.openschedule.social.ScheduleOperations#getNotifications(java.lang.String)
+	 */
+	public List<Notification> getNotifications( String shortName ) {
+		Log.d( TAG, "getNotifications : enter" );
+		
+		Log.d( TAG, "getNotifications : shortName=" + shortName );
+
+		String url = baseUrl + NOTIFICATIONS_PATH;
+		Log.d( TAG, "getNotifications : url=" + url );
+		
+		Log.d( TAG, "getNotifications : exit" );
+		return Arrays.asList( restOperations.exchange( url, HttpMethod.GET,
+				new HttpEntity<Object>( jsonAcceptingHeaders ), Notification[].class, shortName ).getBody() );
+	}
+
 	static final String DEFAULT_BASE_URL = "http://stream.tllts.org:8080/schedule";
 	static final String EVENTS_PATH = "/public";
-	static final String EVENT_PATH = "/public/{shortName}";
-	static final String PUBLIC_EVENT_PATH = "/public/{shortName}";
-	static final String EVENT_COMMENTS_PATH = PUBLIC_EVENT_PATH + "/comments";
-	static final String BLOCK_COMMENTS_PATH = PUBLIC_EVENT_PATH + "/days/{dayId}/schedules/{scheduleId}/blocks/{blockId}/comments";
+	static final String EVENT_PATH = EVENTS_PATH + "/{shortName}";
+	static final String EVENT_COMMENTS_PATH = EVENT_PATH + "/comments";
+	static final String BLOCK_COMMENTS_PATH = EVENT_PATH + "/days/{dayId}/schedules/{scheduleId}/blocks/{blockId}/comments";
+	static final String NOTIFICATIONS_PATH = EVENT_PATH + "/notifications";
 	
 	private MultiValueMap<String, String> jsonAcceptingHeaders;
 

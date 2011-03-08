@@ -48,6 +48,7 @@
     <string-array name="comments_options_array">
     	<item>Add Comment</item>
     	<item>View Comments</item>
+    	<item>View Notifications</item>
     </string-array>
 
     <string-array name="event_session_details_options_array">

@@ -33,7 +33,7 @@ import android.net.Uri;
  */
 public class Prefs {
 
-	public static final String SCHEDULE_SERVER_BASE_URL = "http://stream.tllts.org:8080/schedule"; //"http://10.0.2.2:8080/schedule";
+	public static final String SCHEDULE_SERVER_BASE_URL = "http://stream.tllts.org/schedule"; //"http://10.0.2.2:8080/schedule"
 
 	public static final String PREFS = "SchedulePreferences";
 

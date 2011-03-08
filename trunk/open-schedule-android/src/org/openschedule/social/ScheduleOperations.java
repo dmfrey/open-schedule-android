@@ -25,11 +25,8 @@ import java.util.List;
 
 import org.openschedule.domain.Comment;
 import org.openschedule.domain.Event;
+import org.openschedule.domain.Notification;
 
-/**
- * @author dmfrey
- *
- */
 public interface ScheduleOperations {
 
 	List<Event> getPublishedEvents();
@@ -44,4 +41,6 @@ public interface ScheduleOperations {
 
 	List<Comment> getBlockComments( String shortName, Integer dayId, Integer scheduleId, Integer blockId );
 	
+	List<Notification> getNotifications( String shortName );
+
 }

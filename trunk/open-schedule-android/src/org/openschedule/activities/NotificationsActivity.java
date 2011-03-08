@@ -1,23 +1,5 @@
 /**
- *  This file is part of OpenSchedule for Android
  * 
- *  OpenSchedule for Android is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  OpenSchedule for Android is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with OpenSchedule for Android.  If not, see <http://www.gnu.org/licenses/>.
- *   
- * @author Daniel Frey <dmfrey at gmail dot com>
- * 
- * This software can be found at <http://code.google.com/p/open-schedule-android/>
- *
  */
 package org.openschedule.activities;
 
@@ -28,8 +10,10 @@ import java.util.Map;
 
 import org.openschedule.R;
 import org.openschedule.controllers.EventsController;
-import org.openschedule.domain.Comment;
+import org.openschedule.controllers.NavigationManager;
+import org.openschedule.domain.Notification;
 import org.openschedule.util.Prefs;
+import org.openschedule.util.SharedDataManager;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -39,16 +23,18 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 /**
  * @author dmfrey
  *
  */
-public class EventCommentsActivity extends ListActivity {
+public class NotificationsActivity extends ListActivity {
 
-	private static final String TAG = "EventCommentsActivity";
-	private List<Comment> currentComments;
+	private static final String TAG = "NotificationsActivity";
+	private List<Notification> currentNotifications;
 	
 	private SharedPreferences _settings;
 
@@ -71,7 +57,7 @@ public class EventCommentsActivity extends ListActivity {
 	    Log.d( TAG, "onStart : enter" );
 
 	    super.onStart();
-		refreshComments();
+		refreshNotifications();
 
 		Log.d( TAG, "onStart : exit" );
 	}
@@ -81,9 +67,26 @@ public class EventCommentsActivity extends ListActivity {
 	    Log.d( TAG, "onResume : enter" );
 
 	    super.onResume();
-		refreshComments();
+		refreshNotifications();
 
 		Log.d( TAG, "onResume : exit" );
+	}
+
+	//***************************************
+    // ListActivity methods
+    //***************************************
+	@Override
+	protected void onListItemClick( ListView l, View v, int position, long id ) {
+		Log.d( TAG, "onListItemClick : enter" );
+
+		super.onListItemClick( l, v, position, id );
+		
+		Notification notification = currentNotifications.get( position );
+		SharedDataManager.setCurrentNotification( notification );
+		
+		NavigationManager.startActivity( v.getContext(), NotificationDetailsActivity.class );
+
+		Log.d( TAG, "onListItemClick : exit" );
 	}
 
 	@Override
@@ -91,7 +94,7 @@ public class EventCommentsActivity extends ListActivity {
 	    Log.d( TAG, "onCreateOptionsMenu : enter" );
 
 	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate( R.menu.comments_menu, menu );
+	    inflater.inflate( R.menu.notifications_menu, menu );
 
 	    Log.d( TAG, "onCreateOptionsMenu : exit" );
 	    return true;
@@ -103,9 +106,9 @@ public class EventCommentsActivity extends ListActivity {
 
 	    // Handle item selection
 	    switch( item.getItemId() ) {
-	    case R.id.comments_menu_refresh:
+	    case R.id.notifications_menu_refresh:
 	    	
-	    	refreshComments();
+	    	refreshNotifications();
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
 	    	return true;
@@ -118,48 +121,45 @@ public class EventCommentsActivity extends ListActivity {
 	//***************************************
     // Private methods
     //***************************************
-	private void refreshComments() {
-		Log.d( TAG, "Refreshing Comments : enter" );
-
+	private void refreshNotifications() {
+		Log.d( TAG, "Refreshing Notifications : enter" );
+		
 		String selectedEvent = Prefs.getSelectedEvent( _settings );
 		if( null != selectedEvent ) {
-			Log.v( TAG, "Refreshing Comments : get selected event" );
-			currentComments = EventsController.getEventComments( this, selectedEvent );
+			Log.v( TAG, "Refreshing Notifications : get selected event" );
+			currentNotifications = EventsController.getNotifications( this, selectedEvent );
 		}
 
-		if( null == currentComments ) {
-			Log.d( TAG, "Refreshing Comments : exit, no comments" );
+		if( null == currentNotifications ) {
+			Log.d( TAG, "Refreshing Notifications : exit, no notifications" );
 
 			return;
 		}
 
-		List<Map<String,String>> comments = new ArrayList<Map<String,String>>();
+		List<Map<String,String>> notifications = new ArrayList<Map<String,String>>();
 		
-		for( Comment comment : currentComments ) {
-			
+		for( Notification notification : currentNotifications ) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put( "name", comment.getName() );
-			map.put( "comment", comment.getComment() );
-			comments.add( map );
+			map.put( "title", notification.getTitle() );
+			notifications.add( map );
 		}
 		
-		if( comments.isEmpty() ) {
+		if( notifications.isEmpty() ) {
 			Map<String, String> map = new HashMap<String, String>();
-			map.put( "name", "No Comments have been entered." );
-			map.put( "comment", "" );
-			comments.add( map );
+			map.put( "title", "There are no Notifications." );
+			notifications.add( map );
 		}
 		
 		SimpleAdapter adapter = new SimpleAdapter(
 			this,
-			comments,
-			R.layout.comment_list_item,
-			new String[] { "name", "comment" },
-			new int[] { R.id.comment_name, R.id.comment_comment } 
+			notifications,
+			R.layout.notification_list_item,
+			new String[] { "title", "message" },
+			new int[] { R.id.notification_title } 
 		);
 		
 		setListAdapter( adapter );
-		Log.d( TAG, "Refreshing Comments : exit" );
+		Log.d( TAG, "Refreshing Notifications : exit" );
 	}
 
 }

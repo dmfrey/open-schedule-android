@@ -28,8 +28,10 @@ import java.util.List;
 
 import org.openschedule.domain.Comment;
 import org.openschedule.domain.Event;
+import org.openschedule.domain.Notification;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 
 /**
@@ -43,6 +45,11 @@ public class EventsController extends BaseController {
 	//***************************************
     // Public methods
     //***************************************
+	
+	/**
+	 * @param activity
+	 * @return
+	 */
 	public static List<Event> getPublishedEvents( Activity activity ) {
 		Log.d( TAG, "getPublishedEvents : enter" );
 		
@@ -62,6 +69,11 @@ public class EventsController extends BaseController {
 		return null;
 	}
 
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @return
+	 */
 	public static Event getEvent( Activity activity, String shortName ) {
 		Log.d( TAG, "getEvent : enter" );
 
@@ -81,6 +93,11 @@ public class EventsController extends BaseController {
 		return null;
 	}
 	
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @param comment
+	 */
 	public static void addEventComment( Activity activity, String shortName, Comment comment ) {
 		Log.d( TAG, "addEventComment : enter" );
 
@@ -98,6 +115,11 @@ public class EventsController extends BaseController {
 		Log.d( TAG, "addEventComment : exit" );
 	}
 	
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @return
+	 */
 	public static List<Comment> getEventComments( Activity activity, String shortName ) {
 		Log.d( TAG, "getEventComments : enter" );
 
@@ -117,6 +139,14 @@ public class EventsController extends BaseController {
 		return null;
 	}
 	
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @param dayId
+	 * @param scheduleId
+	 * @param blockId
+	 * @param comment
+	 */
 	public static void addBlockComment( Activity activity, String shortName, Integer dayId, Integer scheduleId, Integer blockId, Comment comment ) {
 		Log.d( TAG, "addBlockComment : enter" );
 
@@ -134,12 +164,20 @@ public class EventsController extends BaseController {
 		Log.d( TAG, "addBlockComment : exit" );
 	}
 	
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @param dayId
+	 * @param scheduleId
+	 * @param blockId
+	 * @return
+	 */
 	public static List<Comment> getBlockComments( Activity activity, String shortName, Integer dayId, Integer scheduleId, Integer blockId ) {
-		Log.d( TAG, "getBlockCommentsgetBlockComments : enter" );
+		Log.d( TAG, "getBlockComments : enter" );
 
 		showProgressDialog( activity );
 		try {
-			Log.d( TAG, "getSessionComments : exit" );
+			Log.d( TAG, "getBlockComments : exit" );
 			return getScheduleOperations( activity ).getBlockComments( shortName, dayId, scheduleId, blockId );
 		} catch( Exception e ) {
 			Log.e( TAG, e.getMessage(), e );
@@ -150,6 +188,54 @@ public class EventsController extends BaseController {
 		}
 		
 		Log.d( TAG, "getBlockComments : exit" );
+		return null;
+	}
+
+	/**
+	 * @param activity
+	 * @param shortName
+	 * @param dayId
+	 * @param scheduleId
+	 * @param blockId
+	 * @return
+	 */
+	public static List<Notification> getNotifications( Activity activity, String shortName, Integer dayId, Integer scheduleId, Integer blockId ) {
+		Log.d( TAG, "getNotifications : enter" );
+
+		showProgressDialog( activity );
+		try {
+			Log.d( TAG, "getNotifications : exit" );
+			return getScheduleOperations( activity ).getNotifications( shortName );
+		} catch( Exception e ) {
+			Log.e( TAG, e.getMessage(), e );
+			Writer result = new StringWriter();
+			e.printStackTrace( new PrintWriter( result ) );
+		} finally {
+			dismissProgressDialog();
+		}
+		
+		Log.d( TAG, "getNotifications : exit" );
+		return null;
+	}
+
+	/**
+	 * @param context
+	 * @param shortName
+	 * @return
+	 */
+	public static List<Notification> getNotifications( Context context, String shortName ) {
+		Log.d( TAG, "getNotifications : enter" );
+
+		try {
+			Log.d( TAG, "getNotifications : exit" );
+			return getScheduleOperations( context ).getNotifications( shortName );
+		} catch( Exception e ) {
+			Log.e( TAG, e.getMessage(), e );
+			Writer result = new StringWriter();
+			e.printStackTrace( new PrintWriter( result ) );
+		}
+		
+		Log.d( TAG, "getNotifications : exit" );
 		return null;
 	}
 
