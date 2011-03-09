@@ -58,7 +58,7 @@ import android.widget.Toast;
  */
 public class SessionActivity extends Activity {
 
-	private static final String TAG = "InfoActivity";
+	private static final String TAG = "SessionActivity";
 
 	@Override
 	public void onCreate( Bundle savedInstanceState ) {
