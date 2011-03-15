@@ -28,6 +28,7 @@ import java.util.Map;
 
 import org.openschedule.R;
 import org.openschedule.controllers.EventsController;
+import org.openschedule.controllers.NavigationManager;
 import org.openschedule.domain.Comment;
 import org.openschedule.util.Prefs;
 
@@ -108,6 +109,11 @@ public class EventCommentsActivity extends ListActivity {
 	    	refreshComments();
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
+	    	return true;
+	    case R.id.comments_menu_about:
+	    	NavigationManager.startActivity( this, AboutActivity.class );
+
+	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;
 	    default:
 	    	Log.d( TAG, "onOptionsItemSelected : exit, default option selected" );

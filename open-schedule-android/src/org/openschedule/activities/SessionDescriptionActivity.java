@@ -22,12 +22,16 @@
 package org.openschedule.activities;
 
 import org.openschedule.R;
+import org.openschedule.controllers.NavigationManager;
 import org.openschedule.domain.Block;
 import org.openschedule.util.SharedDataManager;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
@@ -74,6 +78,34 @@ public class SessionDescriptionActivity extends Activity {
 		Log.d( TAG, "onResume : exit" );
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu( Menu menu ) {
+	    Log.d( TAG, "onCreateOptionsMenu : enter" );
+
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate( R.menu.about_menu, menu );
+
+	    Log.d( TAG, "onCreateOptionsMenu : exit" );
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected( MenuItem item ) {		
+	    Log.d( TAG, "onOptionsItemSelected : enter" );
+
+	    // Handle item selection
+	    switch( item.getItemId() ) {
+	    case R.id.about_menu:
+	    	NavigationManager.startActivity( this, AboutActivity.class );
+
+	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
+	    	return true;
+	    default:
+	    	Log.d( TAG, "onOptionsItemSelected : exit, default option selected" );
+	        return super.onOptionsItemSelected( item );
+	    }
+	}
+
 	//***************************************
     // Private methods
     //***************************************
@@ -89,7 +121,23 @@ public class SessionDescriptionActivity extends Activity {
 		
 		final TextView sessionDescriptionTextView = (TextView) findViewById( R.id.session_description_textview );
 
-		sessionDescriptionTextView.setText( block.getSession().getDescription() );
+		if( null != block.getSession() ) {
+			Log.d( TAG, "Refreshing Session : session is not null in block" );
+			
+			if( null != block.getSession().getDescription() ) {
+				Log.d( TAG, "Refreshing Session : description is not null in session" );
+
+				sessionDescriptionTextView.setText( block.getSession().getDescription() );
+			} else {
+				Log.d( TAG, "Refreshing Session : description is null in session" );
+				
+				sessionDescriptionTextView.setText( "Description not available" );
+			}
+		} else {
+			Log.d( TAG, "Refreshing Session : session is null in block" );
+
+			sessionDescriptionTextView.setText( "Description not available" );
+		}
 		
 		Log.d( TAG, "Refreshing Session : exit" );
 	}
