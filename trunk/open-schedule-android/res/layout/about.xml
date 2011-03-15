@@ -16,10 +16,10 @@
 	    		android:paddingBottom="20dp">
 	
 				<TextView 
-					style="@style/BoldText" 
+					style="@style/HeadingText" 
 					android:id="@+id/about_header_text_view"
 					android:text="@string/about_header" />
-			
+
 			    <TextView 
 			    	style="@style/Text"
 			    	android:id="@+id/about_description_text_view"
@@ -27,13 +27,63 @@
 
 				<TextView 
 					style="@style/BoldText" 
+					android:id="@+id/about_free_software_header_text_view"
+					android:text="@string/about_free_software_header" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_free_software_description_text_view"
+			    	android:text="@string/about_free_software_description" />
+
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/about_source_code_header_text_view"
+					android:text="@string/about_source_code_header" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_source_code_description_text_view"
+			    	android:text="@string/about_source_code_description" />
+
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_source_code_url_1_text_view"
+			    	android:text="@string/about_source_code_url_1" />
+
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_source_code_url_2_text_view"
+			    	android:text="@string/about_source_code_url_2" />
+
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/about_spring_header_text_view"
+					android:text="@string/about_spring_header" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_spring_description_text_view"
+			    	android:text="@string/about_spring_description" />
+
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/about_created_header_text_view"
+					android:text="@string/about_created_header" />
+
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/about_created_description_text_view"
+					android:text="@string/about_created_description" />
+
+				<TextView 
+					style="@style/BoldText" 
 					android:id="@+id/about_thanks_header_text_view"
-					android:text="@string/about_thanks_header" />
+					 />
 
 			    <TextView 
 			    	style="@style/Text"
 			    	android:id="@+id/about_thanks_description_site_text_view"
-					android:text="@string/about_thanks_description" />
+					 />
 
 			</LinearLayout>
 			    		

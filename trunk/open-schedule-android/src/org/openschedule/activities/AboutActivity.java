@@ -25,7 +25,9 @@ import org.openschedule.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.widget.TextView;
 
 public class AboutActivity extends Activity {
 
@@ -42,8 +44,28 @@ public class AboutActivity extends Activity {
 
 	    setContentView( R.layout.about );
 
+	    final TextView description = (TextView) findViewById( R.id.about_description_text_view );
+	    description.setMovementMethod( LinkMovementMethod.getInstance() );
 		
-		Log.d( TAG, "onCreate : exit" );
+	    final TextView freeSoftwareDescription = (TextView) findViewById( R.id.about_free_software_description_text_view );
+	    freeSoftwareDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView sourceCodeDescription = (TextView) findViewById( R.id.about_source_code_description_text_view );
+	    sourceCodeDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView sourceCodeUrlOneDescription = (TextView) findViewById( R.id.about_source_code_url_1_text_view );
+	    sourceCodeUrlOneDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView sourceCodeUrlTwoDescription = (TextView) findViewById( R.id.about_source_code_url_2_text_view );
+	    sourceCodeUrlTwoDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView springDescription = (TextView) findViewById( R.id.about_spring_description_text_view );
+	    springDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView createdDescription = (TextView) findViewById( R.id.about_created_description_text_view );
+	    createdDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    Log.d( TAG, "onCreate : exit" );
 	}
 
 }

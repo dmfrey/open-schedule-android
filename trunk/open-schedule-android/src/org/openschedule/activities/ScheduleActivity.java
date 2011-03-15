@@ -73,12 +73,20 @@ public class ScheduleActivity extends ListActivity {
     //***************************************
 	@Override
 	protected void onListItemClick( ListView l, View v, int position, long id ) {
+		Log.d( TAG, "onListItemClick : enter" );
+
 		super.onListItemClick( l, v, position, id );
+		
+		Log.d( TAG, "onListItemClick : selecting position=" + position );
 		
 		Block block = scheduleBlocks.get( position );
 		SharedDataManager.setCurrentBlock( block );
 		
-		NavigationManager.startActivity( v.getContext(), SessionActivity.class );
+		if( null != block.getLabel() && null != block.getSession() ) {
+			NavigationManager.startActivity( v.getContext(), SessionActivity.class );
+		}
+		
+		Log.d( TAG, "onListItemClick : exit" );
 	}
 
 	//***************************************
@@ -103,6 +111,11 @@ public class ScheduleActivity extends ListActivity {
 				Map<String, String> map = new HashMap<String, String>();
 				map.put( "block_label", block.getLabel().getName() );
 				map.put( "block_name", block.getSession().getName() );
+				blocks.add( map );
+			} else {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put( "block_label", "" );
+				map.put( "block_name", "Empty" );
 				blocks.add( map );
 			}
 		}		

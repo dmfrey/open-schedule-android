@@ -33,6 +33,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -149,6 +152,34 @@ public class SpeakerActivity extends Activity {
 		refreshSpeaker();
 
 		Log.d( TAG, "onResume : exit" );
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu( Menu menu ) {
+	    Log.d( TAG, "onCreateOptionsMenu : enter" );
+
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate( R.menu.about_menu, menu );
+
+	    Log.d( TAG, "onCreateOptionsMenu : exit" );
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected( MenuItem item ) {		
+	    Log.d( TAG, "onOptionsItemSelected : enter" );
+
+	    // Handle item selection
+	    switch( item.getItemId() ) {
+	    case R.id.about_menu:
+	    	NavigationManager.startActivity( this, AboutActivity.class );
+
+	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
+	    	return true;
+	    default:
+	    	Log.d( TAG, "onOptionsItemSelected : exit, default option selected" );
+	        return super.onOptionsItemSelected( item );
+	    }
 	}
 
 	//***************************************

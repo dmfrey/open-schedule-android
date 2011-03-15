@@ -26,7 +26,7 @@ import org.openschedule.R;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.os.Build;
+//import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TabHost;
@@ -58,8 +58,9 @@ public class MainTabWidget extends TabActivity {
 		intent = new Intent();
 		intent.setClass( this, InfoActivity.class );
 		
-		tabSpec = tabHost.newTabSpec( "event" );
-		tabSpec.setIndicator( "Event", ( Build.VERSION.SDK_INT > 4 ) ? res.getDrawable( R.drawable.ic_tab_schedule ) : res.getDrawable( R.drawable.ic_tab_schedule_1x ) );
+		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_event ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_event_label ) );
+		//tabSpec.setIndicator( res.getString( R.string.tab_event_label ), ( Build.VERSION.SDK_INT > 4 ) ? res.getDrawable( R.drawable.ic_tab_schedule ) : res.getDrawable( R.drawable.ic_tab_schedule_1x ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 
@@ -67,8 +68,9 @@ public class MainTabWidget extends TabActivity {
 		intent = new Intent();
 		intent.setClass( this, EventActivity.class );
 		
-		tabSpec = tabHost.newTabSpec( "schedule" );
-		tabSpec.setIndicator( "Schedule", res.getDrawable( R.drawable.ic_tab_events ) );
+		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_schedule ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_schedule_label ) );
+		//tabSpec.setIndicator( res.getString( R.string.tab_schedule_label ), res.getDrawable( R.drawable.ic_tab_events ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 		
@@ -76,8 +78,9 @@ public class MainTabWidget extends TabActivity {
 		intent = new Intent();
 		intent.setClass( this, VenuesActivity.class );
 		
-		tabSpec = tabHost.newTabSpec( "venues" );
-		tabSpec.setIndicator( "Venues", ( Build.VERSION.SDK_INT > 4 ) ? res.getDrawable( R.drawable.ic_tab_venue ) : res.getDrawable( R.drawable.ic_tab_venue_1x ) );
+		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_venues ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_venues_label ) );
+		//tabSpec.setIndicator( res.getString( R.string.tab_venues_label ), ( Build.VERSION.SDK_INT > 4 ) ? res.getDrawable( R.drawable.ic_tab_venue ) : res.getDrawable( R.drawable.ic_tab_venue_1x ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 
