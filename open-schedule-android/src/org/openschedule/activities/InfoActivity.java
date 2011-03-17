@@ -86,46 +86,56 @@ public class InfoActivity extends Activity {
 		    	
       			Event event = SharedDataManager.getCurrentEvent();
 
-      			Calendar now = Calendar.getInstance();
-      			
-  				Calendar startTime = Calendar.getInstance();
-  				startTime.setTime( event.getStartDate() );
-  				
-				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
-				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
-				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
-  				
-  				switch( position ) {
-		    		case 0:
-		    			Log.d( TAG, "add comment" );
+      			if( null != event ) {
+      				
+      				Calendar now = Calendar.getInstance();
 
-		    			if( now.after( startTime ) ) {
-			    			Log.d( TAG, "adding comments are enabled, the event has started" );
+      				Calendar startTime = Calendar.getInstance();
+      				startTime.setTime( event.getStartDate() );
 
-			    			NavigationManager.startActivity( view.getContext(), EventCommentFormActivity.class );
-		    			} else {
-			    			Log.d( TAG, "adding comments is disabled, the event has not started" );
+      				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
+      				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
+      				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
 
-			    			Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
-		    			}
-		    			
-		    			break;
-			      	case 1:
-			      		Log.d( TAG, "view comments" );
+      				switch( position ) {
+      				case 0:
+      					Log.d( TAG, "add comment" );
 
-		    			NavigationManager.startActivity( view.getContext(), EventCommentsActivity.class );
-			      		break;
-			      	case 2:
-			      		Log.d( TAG, "view notifications" );
+      					if( now.after( startTime ) ) {
+      						Log.d( TAG, "adding comments are enabled, the event has started" );
 
-		    			NavigationManager.startActivity( view.getContext(), NotificationsActivity.class );
-			      		break;
-			      	default:
-			      		Log.d( TAG, "default option" );
-			      		break;
-		    	}
+      						NavigationManager.startActivity( view.getContext(), EventCommentFormActivity.class );
+      					} else {
+      						Log.d( TAG, "adding comments is disabled, the event has not started" );
+
+      						Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
+      						toast.setGravity( Gravity.CENTER, 0, 0 );
+      						toast.show();
+      					}
+
+      					break;
+      				case 1:
+      					Log.d( TAG, "view comments" );
+
+      					NavigationManager.startActivity( view.getContext(), EventCommentsActivity.class );
+      					break;
+      				case 2:
+      					Log.d( TAG, "view notifications" );
+
+      					NavigationManager.startActivity( view.getContext(), NotificationsActivity.class );
+      					break;
+      				default:
+      					Log.d( TAG, "default option" );
+      					break;
+      				}
+
+				} else {
+					Log.d( TAG, "no event selected" );
+
+					Toast toast = Toast.makeText( view.getContext(), "You have not selected an Event.", Toast.LENGTH_LONG );
+  					toast.setGravity( Gravity.CENTER, 0, 0 );
+  					toast.show();
+      			}
 		    }
 		});
 
