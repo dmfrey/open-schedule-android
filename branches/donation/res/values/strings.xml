@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OpenSchedule</string>
+    
+    <string name="tab_event">event</string>
+    <string name="tab_event_label">Event</string>
+    <string name="tab_schedule">schedule</string>
+    <string name="tab_schedule_label">Schedule</string>
+    <string name="tab_venues">venues</string>
+    <string name="tab_venues_label">Venues</string>
+    
+    <string name="menu_refresh_label">Refresh</string>
+    
+    <string name="title_event_details">Event Details</string>
+    <string name="title_event_description">Event Description</string>
+    <string name="title_event_sessions_filtered">Filtered Sessions</string>
+    <string name="title_event_sessions_schedule">Session Schedule</string>
+    <string name="title_event_sessions_current">Current Sessions</string>
+    <string name="title_event_sessions_upcoming">Upcoming Sessions</string>
+    <string name="title_event_sessions_my_favorites">My Favorite Sessions</string>
+    <string name="title_event_sessions_conference_favorites">Conference Favorite Sessions</string>
+    <string name="title_event_sessions_by_day">Sessions by Day</string>
+    <string name="title_event_session_details">Session Details</string>
+    <string name="title_event_session_description">Session Description</string>
+
+	<string name="title_published_events_select">Select Event</string>
+	
+	<string name="event_comment_form_label_text_title">Add Comment for Event</string>
+	<string name="session_comment_form_label_text_title">Add Comment for Session</string>
+
+	<string name="comment_form_label_text_name">Name: (optional)</string>
+	<string name="comment_form_label_hint_name">Enter your name</string>
+	<string name="comment_form_label_text_email">Email: (optional)</string>
+	<string name="comment_form_label_hint_email">Enter email address</string>
+	<string name="comment_form_label_text_comment">Comments:</string>
+	
+	<string name="form_button_label_text_submit">Submit</string>
+	<string name="form_button_label_text_cancel">Cancel</string>
+	<string name="form_button_label_text_clear">Clear</string>
+
+	<string name="about_label">About</string>
+	<string name="about_header">About OpenSchedule</string>
+	<string name="about_description">OpenSchedule for Android is the companion application for the OpenSchedule Conference Scheduling web application.  OpenSchedule can be found at <a href='http://stream.tllts.org/schedule'>http://stream.tllts.org/schedule</a>.  The web application is free to use by anyone looking to plan an event.  It is easy to use and can be integrated with your existing event website with simple php scripts.</string>
+	<string name="about_free_software_header">Free Software</string>
+	<string name="about_free_software_description">OpenSchedule is free software and is licensed under the GNU Public License, version 3.  Details about GPLv3 can be found at <a href='http://www.gnu.org/licenses/gpl.html'>http://www.gnu.org/licenses/gpl.html</a>.</string>
+	<string name="about_source_code_header">Source Code</string>
+	<string name="about_source_code_description">Code can be found at <a href='http://code.google.com'>http://code.google.com</a> in the projects open-schedule and open-schedule-android.</string>
+	<string name="about_source_code_url_1">Code for the web application can be found at <a href='http://code.google.com/p/open-schedule/'>http://code.google.com/p/open-schedule/</a></string>
+	<string name="about_source_code_url_2">Code for the android application can be found at <a href='http://code.google.com/p/open-schedule-android/'>http://code.google.com/p/open-schedule-android/</a></string>
+	<string name="about_spring_header">The Spring Framework</string>
+	<string name="about_spring_description">This application, as well as the companion web application are created with components of the Spring Framework.  Detail about Spring can be found at <a href='http://www.springframework.org'>http://www.springframework.org</a></string>
+	<string name="about_created_header">Created By</string>
+	<string name="about_created_description">This software was created by <a href='mailto:OpenSchedule.ws@gmail.com'>Dan Frey</a></string>
+	<string name="about_thanks_header">Special Thanks to...</string>
+	<string name="about_thanks_description"></string>
+
+    <string-array name="event_details_options_array">
+        <item>Description</item>
+        <item>Filtered Sessions</item>
+        <item>Session Schedule</item>
+        <item>Map</item>
+    </string-array>
+    
+    <string-array name="event_filtered_sessions_options_array">
+    	<item>Current</item>
+    	<item>Upcoming</item>
+    </string-array>
+    
+    <string-array name="comments_options_array">
+    	<item>Add Comment</item>
+    	<item>View Comments</item>
+    	<item>View Notifications</item>
+    </string-array>
+
+    <string-array name="event_session_details_options_array">
+        <item>Description</item>
+    </string-array>
+
+    <string-array name="session_options_array">
+        <item>Description</item>
+        <item>Speakers</item>
+        <item>View Comments</item>
+        <item>Tweet</item>
+        <item>Add to Calendar</item>
+		<item>Add Comment</item>
+    </string-array>
+
+    <string-array name="speaker_options_array">
+        <item>Bio</item>
+        <item>Web Site</item>
+        <item>Contact</item>
+    </string-array>
+
+    <string-array name="venue_options_array">
+        <item>Web Site</item>
+        <item>Call</item>
+        <item>Contact</item>
+        <item>Navigate</item>
+    </string-array>
+
+</resources>

@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+		android:id="@+id/notifications_menu_refresh"
+		android:title="@string/menu_refresh_label" />
+		
+    <item
+		android:id="@+id/notifications_menu_about"
+		android:title="@string/about_label" />
+
+</menu>

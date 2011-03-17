@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      android:versionCode="2"
+      android:versionName="1.1" package="org.openschedule">
+      
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+	<uses-permission android:name="android.permission.READ_CALENDAR" />
+	<uses-permission android:name="android.permission.WRITE_CALENDAR" />
+   
+    <application android:icon="@drawable/icon" android:label="@string/app_name">
+    	<activity 
+			android:name="org.openschedule.activities.FrontDoorActivity"
+			android:theme="@android:style/Theme.NoTitleBar">
+			
+			<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+		</activity>
+
+		<activity 
+			android:name="org.openschedule.activities.MainTabWidget" 
+			android:label="@string/app_name" 
+			android:theme="@android:style/Theme.NoTitleBar"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.InfoActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.EventActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.EventCommentFormActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.EventCommentsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.DayActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.ScheduleActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SessionActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SessionDescriptionActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SessionCommentsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SessionCommentFormActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SpeakersActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SpeakerActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.SpeakerBiographyActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.VenuesActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.VenueDetailsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.AboutActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.NotificationsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.NotificationDetailsActivity"
+			android:screenOrientation="portrait" />
+
+		<activity 
+			android:name="org.openschedule.activities.twitter.TwitterActivity"
+			android:screenOrientation="portrait">
+			<intent-filter>
+   				<action android:name="android.intent.action.VIEW" />	
+   				<category android:name="android.intent.category.DEFAULT" />
+   				<category android:name="android.intent.category.BROWSABLE" />
+   				<data android:scheme="x-org-openschedule" android:host="twitter-response" />
+			</intent-filter>
+		</activity>
+
+    </application>
+
+</manifest>

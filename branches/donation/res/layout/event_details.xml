@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/MainTabLayout">
+	
+	<ScrollView
+		style="@style/ScrollView">
+
+		<RelativeLayout
+			style="@style/ScrollableContainerLayout">
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+			    android:orientation="vertical"
+	    		android:paddingBottom="20dp">
+	
+				<TextView 
+					style="@style/Text" 
+					android:id="@+id/event_details_textview_name" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/event_details_textview_date" />
+			        
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/event_details_textview_location" />
+			    	
+			</LinearLayout>
+			    		
+    		<ListView
+    			style="@style/MenuListView"
+    			android:layout_alignParentBottom="true"
+    			android:id="@+id/event_details_menu"
+    			android:entries="@array/event_details_options_array" />
+
+		</RelativeLayout>
+		
+	</ScrollView>
+	
+</FrameLayout>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	style="@style/MainTabLayout">
+	
+	<ScrollView
+		style="@style/ScrollView">
+
+		<RelativeLayout
+			style="@style/ScrollableContainerLayout">
+
+			<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+			    android:orientation="vertical"
+	    		android:paddingBottom="20dp">
+	
+				<TextView 
+					style="@style/BoldText" 
+					android:id="@+id/notification_title" />
+			
+			    <TextView 
+			    	style="@style/Text"
+			    	android:id="@+id/notification_message" />
+			        
+			</LinearLayout>
+			    		
+		</RelativeLayout>
+		
+	</ScrollView>
+	
+</FrameLayout>
