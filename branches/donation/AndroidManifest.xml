@@ -2,7 +2,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       android:versionCode="2"
-      android:versionName="1.1" package="org.openschedule">
+      android:versionName="1.1" package="org.openschedule.donation">
       
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="8" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,7 +12,7 @@
    
     <application android:icon="@drawable/icon" android:label="@string/app_name">
     	<activity 
-			android:name="org.openschedule.activities.FrontDoorActivity"
+			android:name="org.openschedule.donation.activities.FrontDoorActivity"
 			android:theme="@android:style/Theme.NoTitleBar">
 			
 			<intent-filter>
@@ -23,85 +23,77 @@
 		</activity>
 
 		<activity 
-			android:name="org.openschedule.activities.MainTabWidget" 
+			android:name="org.openschedule.donation.activities.MainTabWidget" 
 			android:label="@string/app_name" 
 			android:theme="@android:style/Theme.NoTitleBar"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.InfoActivity"
+			android:name="org.openschedule.donation.activities.InfoActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.EventActivity"
+			android:name="org.openschedule.donation.activities.EventActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.EventCommentFormActivity"
+			android:name="org.openschedule.donation.activities.EventCommentFormActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.EventCommentsActivity"
+			android:name="org.openschedule.donation.activities.EventCommentsActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.DayActivity"
+			android:name="org.openschedule.donation.activities.DayActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.ScheduleActivity"
+			android:name="org.openschedule.donation.activities.ScheduleActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SessionActivity"
+			android:name="org.openschedule.donation.activities.SessionActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SessionDescriptionActivity"
+			android:name="org.openschedule.donation.activities.SessionDescriptionActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SessionCommentsActivity"
+			android:name="org.openschedule.donation.activities.SessionCommentsActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SessionCommentFormActivity"
+			android:name="org.openschedule.donation.activities.SessionCommentFormActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SpeakersActivity"
+			android:name="org.openschedule.donation.activities.SpeakersActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SpeakerActivity"
+			android:name="org.openschedule.donation.activities.SpeakerActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.SpeakerBiographyActivity"
+			android:name="org.openschedule.donation.activities.SpeakerBiographyActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.VenuesActivity"
+			android:name="org.openschedule.donation.activities.VenuesActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.VenueDetailsActivity"
+			android:name="org.openschedule.donation.activities.VenueDetailsActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.AboutActivity"
+			android:name="org.openschedule.donation.activities.AboutActivity"
 			android:screenOrientation="portrait" />
 
 		<activity 
-			android:name="org.openschedule.activities.NotificationsActivity"
-			android:screenOrientation="portrait" />
-
-		<activity 
-			android:name="org.openschedule.activities.NotificationDetailsActivity"
-			android:screenOrientation="portrait" />
-
-		<activity 
-			android:name="org.openschedule.activities.twitter.TwitterActivity"
+			android:name="oractivities.twitter.TwitterActivityctivities.twitter.TwitterActivity"
 			android:screenOrientation="portrait">
 			<intent-filter>
    				<action android:name="android.intent.action.VIEW" />	
