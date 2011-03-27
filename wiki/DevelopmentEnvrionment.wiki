@@ -18,7 +18,7 @@ These are the requirements for building and running the application in the Andro
 
 Optional Requirements
   * *IDE*: Eclipse-based IDE
-    * I prefer the SpringSource Tool Suite (Current Version: 2.5.2), free Eclipse-based IDE targeted for use with the Spring Framework http://www.springsource.com/developer/sts. This IDE has Maven2 integrated already
+    * I prefer the SpringSource Tool Suite (Current Version: 2.6.0), free Eclipse-based IDE targeted for use with the Spring Framework http://www.springsource.com/developer/sts. This IDE has Maven2 integrated already
   * *Android Plugin*: ADT Plugin for Eclipse http://developer.android.com/sdk/eclipse-adt.html
   * *Maven Android Plugin*: http://code.google.com/p/maven-android-plugin/
   * *Subversion Plugin*: Tigris Subclipse http://subclipse.tigris.org/
