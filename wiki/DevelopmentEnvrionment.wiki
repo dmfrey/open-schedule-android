@@ -5,7 +5,7 @@
 
 This application is written in Java and is targeted for the Android Operating System.  The target Android OS is 2.1, however, there are no Android 2.1 specific dependencies and the application will run on Android 1.5 and greater.
 
-This application utilizes libraries from the Spring Framework http://www.springframework.org.  Two such components are the Spring Mobile and Spring Android projects.
+This application utilizes libraries from the Spring Framework by SpringSource.  Two such components are the Spring Mobile and Spring Android projects.
 
 == Requirements ==
 
