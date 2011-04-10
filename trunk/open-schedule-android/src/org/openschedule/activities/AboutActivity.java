@@ -65,6 +65,12 @@ public class AboutActivity extends Activity {
 	    final TextView createdDescription = (TextView) findViewById( R.id.about_created_description_text_view );
 	    createdDescription.setMovementMethod( LinkMovementMethod.getInstance() );
 
+	    final TextView specialThanksHeader = (TextView) findViewById( R.id.about_thanks_header_text_view );
+	    specialThanksHeader.setMovementMethod( LinkMovementMethod.getInstance() );
+
+	    final TextView specialThanksDescription = (TextView) findViewById( R.id.about_thanks_description_site_text_view );
+	    specialThanksDescription.setMovementMethod( LinkMovementMethod.getInstance() );
+
 	    Log.d( TAG, "onCreate : exit" );
 	}
 

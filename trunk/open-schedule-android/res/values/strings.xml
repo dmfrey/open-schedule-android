@@ -52,7 +52,7 @@
 	<string name="about_created_header">Created By</string>
 	<string name="about_created_description">This software was created by <a href='mailto:OpenSchedule.ws@gmail.com'>Dan Frey</a></string>
 	<string name="about_thanks_header">Special Thanks to...</string>
-	<string name="about_thanks_description"></string>
+	<string name="about_thanks_description">Richard Querin created all the artwork for this application. You can find out more about Richard\'s work at <a href='http://rfquerin.org'>rfquerin.org</a>. Thank you very much for all your help.</string>
 
     <string-array name="event_details_options_array">
         <item>Description</item>
