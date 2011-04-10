@@ -59,8 +59,7 @@ public class MainTabWidget extends TabActivity {
 		intent.setClass( this, InfoActivity.class );
 		
 		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_event ) );
-		//tabSpec.setIndicator( res.getString( R.string.tab_event_label ) );
-		tabSpec.setIndicator( res.getString( R.string.tab_event_label ), res.getDrawable( R.drawable.ic_tab_schedule ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_event_label ), res.getDrawable( R.drawable.ic_tab_event ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 
@@ -69,8 +68,7 @@ public class MainTabWidget extends TabActivity {
 		intent.setClass( this, EventActivity.class );
 		
 		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_schedule ) );
-		//tabSpec.setIndicator( res.getString( R.string.tab_schedule_label ) );
-		tabSpec.setIndicator( res.getString( R.string.tab_schedule_label ), res.getDrawable( R.drawable.ic_tab_events ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_schedule_label ), res.getDrawable( R.drawable.ic_tab_schedule ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 		
@@ -79,7 +77,6 @@ public class MainTabWidget extends TabActivity {
 		intent.setClass( this, VenuesActivity.class );
 		
 		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_venues ) );
-		//tabSpec.setIndicator( res.getString( R.string.tab_venues_label ) );
 		tabSpec.setIndicator( res.getString( R.string.tab_venues_label ), res.getDrawable( R.drawable.ic_tab_venue ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
