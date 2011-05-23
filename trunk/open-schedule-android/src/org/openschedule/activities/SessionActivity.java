@@ -191,7 +191,11 @@ public class SessionActivity extends Activity {
 		      				ContentValues contentValues = new ContentValues();
 		      				contentValues.put( "calendar_id", CalIds[ 0 ] );
 
-		      				contentValues.put( "title", event.getName() + ": " + block.getSession().getName()  );
+		      				String title = event.getName();
+		      				if( null != block.getSession().getName() ) {
+		      					title += ": " + block.getSession().getName();
+		      				}
+		      				contentValues.put( "title", title  );
 
 		      				String speakers = "Presented By: ";
 		      				boolean slash = false;
@@ -222,7 +226,13 @@ public class SessionActivity extends Activity {
 
 		      				contentValues.put( "dtstart", startTime.getTimeInMillis() );
 		      				contentValues.put( "dtend", endTime.getTimeInMillis() );
-
+		      				
+		      				contentValues.put( "allDay", 0 );
+		      				contentValues.put( "eventStatus", 1 );
+		      				contentValues.put( "visibility", 0 );
+		      				contentValues.put( "transparency", 0 );
+		      				contentValues.put( "hasAlarm", 1 );
+		      				
 		      				Log.v( TAG, "adding event to calendar" );
 		      				getContentResolver().insert( Uri.parse( contentUri ), contentValues );
 
