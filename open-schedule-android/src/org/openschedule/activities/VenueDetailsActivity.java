@@ -29,6 +29,7 @@ import org.openschedule.util.SharedDataManager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -73,6 +74,8 @@ public class VenueDetailsActivity extends Activity {
 		listView.setOnItemClickListener( new OnItemClickListener() {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 		    	
+		    	PackageManager pm = view.getContext().getPackageManager();
+		    	
 				Venue venue = SharedDataManager.getCurrentVenue();
 				switch( position ) {
 		    		case 0:
@@ -94,25 +97,35 @@ public class VenueDetailsActivity extends Activity {
 			      	case 1:
 			      		Log.d( TAG, "initiate phone call" );
 
-		    			if( null != venue.getPhone() && !"".equals( venue.getPhone() ) ) {
-		    				String phone = venue.getPhone();
-		    				phone = phone.replace( "(", "" );
-		    				phone = phone.replace( ")", "" );
-		    				phone = phone.replace( "-", "" );
-		    				phone = phone.replace( ".", "" );
-		    				phone = phone.replace( " ", "" );
-		    				
-		    				Uri uri = Uri.parse( "tel:" + phone );
-		    				Intent intent = new Intent( Intent.ACTION_DIAL, uri );
+			      		if( pm.hasSystemFeature( PackageManager.FEATURE_TELEPHONY ) ) {
+			      			Log.d( TAG, "device can place calls" );
+			      			
+			      			if( null != venue.getPhone() && !"".equals( venue.getPhone() ) ) {
+			      				String phone = venue.getPhone();
+			      				phone = phone.replace( "(", "" );
+			      				phone = phone.replace( ")", "" );
+			      				phone = phone.replace( "-", "" );
+			      				phone = phone.replace( ".", "" );
+			      				phone = phone.replace( " ", "" );
 
-		    				Log.v( TAG, "starting intiate phone call intent" );
-		    				NavigationManager.startActivity( view.getContext(), intent );
-		    			} else {
-		    				Toast toast = Toast.makeText( view.getContext(), "The venue does not have phone number specified.", Toast.LENGTH_LONG );
-		    				toast.setGravity( Gravity.CENTER, 0, 0 );
-		    				toast.show();
-		    			}
+			      				Uri uri = Uri.parse( "tel:" + phone );
+			      				Intent intent = new Intent( Intent.ACTION_DIAL, uri );
 
+			      				Log.v( TAG, "starting intiate phone call intent" );
+			      				NavigationManager.startActivity( view.getContext(), intent );
+			      			} else {
+			      				Toast toast = Toast.makeText( view.getContext(), "The venue does not have phone number specified.", Toast.LENGTH_LONG );
+			      				toast.setGravity( Gravity.CENTER, 0, 0 );
+			      				toast.show();
+			      			}
+			      		} else {
+			      			Log.d( TAG, "device can not place calls" );
+
+			      			Toast toast = Toast.makeText( view.getContext(), "Your device can not place phone calls.", Toast.LENGTH_LONG );
+		      				toast.setGravity( Gravity.CENTER, 0, 0 );
+		      				toast.show();
+			      		}
+			      		
 		    			break;
 			      	case 2:
 			      		Log.d( TAG, "send email" );
@@ -223,7 +236,6 @@ public class VenueDetailsActivity extends Activity {
 		final TextView venueCityStateZip = (TextView) findViewById( R.id.venue_city_state_zip );
 		final TextView venuePhone = (TextView) findViewById( R.id.venue_phone );
 		final TextView venueEmail = (TextView) findViewById( R.id.venue_email );
-		final TextView venueWebSite = (TextView) findViewById( R.id.venue_web_site );
 		
 		Venue venue = SharedDataManager.getCurrentVenue();
 		
@@ -286,11 +298,6 @@ public class VenueDetailsActivity extends Activity {
 		if( null != venue.getEmail() && !"".equals( venue.getEmail() ) ) {
 			venueEmail.setText( venue.getEmail() );
 			venueEmail.setVisibility( TextView.VISIBLE );
-		}
-
-		if( null != venue.getWebSite() && !"".equals( venue.getWebSite() ) ) {
-			venueWebSite.setText( venue.getWebSite() );
-			venueWebSite.setVisibility( TextView.VISIBLE );
 		}
 
 		Log.d( TAG, "Refreshing Venue Details : exit" );

@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.springframework.android</groupId>
             <artifactId>spring-android-rest-template</artifactId>
-            <version>1.0.0.M2</version>
+            <version>1.0.0.M3</version>
         </dependency>
         <dependency>
             <!-- Using Jackson for JSON marshaling -->
