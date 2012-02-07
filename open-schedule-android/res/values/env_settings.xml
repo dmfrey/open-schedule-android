@@ -1,0 +1,8 @@
+<resources>
+	<!-- string name="connection_repository_encryption_password">${connection.repository.encryption.password}</string>
+	<string name="connection_repository_encryption_salt">${connection.repository.encryption.salt}</string>
+    <string name="base_url">${base.url}</string -->
+	<string name="connection_repository_encryption_password">password</string>
+	<string name="connection_repository_encryption_salt">5c0744940b5c369b</string>
+    <string name="base_url">http://stream.tllts.org/schedule/</string>
+</resources>

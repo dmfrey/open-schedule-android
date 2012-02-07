@@ -23,15 +23,14 @@ package org.openschedule.activities;
 
 import org.openschedule.R;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
-public class AboutActivity extends Activity {
+public class AboutActivity extends AbstractOpenScheduleActivity {
 
-	private static final String TAG = "AboutActivity";
+	private static final String TAG = AboutActivity.class.getSimpleName();
 	
 	/* (non-Javadoc)
 	 * @see android.app.Activity#onCreate(android.os.Bundle)

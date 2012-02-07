@@ -2,8 +2,8 @@
 <resources>
     <string name="app_name">OpenSchedule</string>
     
-    <string name="tab_event">event</string>
-    <string name="tab_event_label">Event</string>
+    <string name="tab_events">events</string>
+    <string name="tab_events_label">Events</string>
     <string name="tab_schedule">schedule</string>
     <string name="tab_schedule_label">Schedule</string>
     <string name="tab_venues">venues</string>
@@ -51,7 +51,7 @@
 	<string name="about_spring_description">This application, as well as the companion web application are created with components of the Spring Framework.  Detail about Spring can be found at <a href='http://www.springframework.org'>http://www.springframework.org</a></string>
 	<string name="about_created_header">Created By</string>
 	<string name="about_created_description">This software was created by <a href='mailto:OpenSchedule.ws@gmail.com'>Dan Frey</a></string>
-	<string name="about_thanks_header">Special Thanks to...</string>
+	<string name="about_thanks_header">Special Thanks to&#8230;</string>
 	<string name="about_thanks_description">Richard Querin created all the artwork for this application. You can find out more about Richard\'s work at <a href='http://rfquerin.org'>rfquerin.org</a>. Thank you very much for all your help.</string>
 
     <string-array name="event_details_options_array">
@@ -59,11 +59,6 @@
         <item>Filtered Sessions</item>
         <item>Session Schedule</item>
         <item>Map</item>
-    </string-array>
-    
-    <string-array name="event_filtered_sessions_options_array">
-    	<item>Current</item>
-    	<item>Upcoming</item>
     </string-array>
     
     <string-array name="comments_options_array">
