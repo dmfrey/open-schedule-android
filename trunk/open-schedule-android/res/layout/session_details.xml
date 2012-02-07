@@ -43,7 +43,6 @@
 
    		<ListView
    			style="@style/MenuListView"
-   			android:layout_alignParentBottom="true"
    			android:id="@+id/session_details_menu"
    			android:entries="@array/session_options_array" />
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/MainTabLayout">
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
 
 	<ScrollView
 		style="@style/ScrollView"
@@ -10,7 +9,7 @@
 		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     		android:orientation="vertical"
     		android:layout_width="fill_parent"
-    		android:layout_height="fill_parent" >
+    		android:layout_height="wrap_content" >
     
 			<TextView 
 				style="@style/HeadingText" 
@@ -57,7 +56,7 @@
 
 			<Button
     	    	android:id="@+id/comment_form_submit_button"
-        		android:layout_width="110px"
+        		android:layout_width="110dp"
         		android:layout_height="wrap_content"
 	        	android:padding="10dp"
     	    	android:text="@string/form_button_label_text_submit"  />
@@ -66,4 +65,4 @@
 		
 	</ScrollView>
 
-</FrameLayout>
+</merge>

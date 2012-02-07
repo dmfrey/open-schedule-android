@@ -22,6 +22,9 @@
 package org.openschedule.activities;
 
 import org.openschedule.R;
+import org.openschedule.activities.event.EventActivity;
+import org.openschedule.activities.event.EventsActivity;
+import org.openschedule.activities.venue.VenuesActivity;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -56,14 +59,14 @@ public class MainTabWidget extends TabActivity {
 				
 		// add events tab
 		intent = new Intent();
-		intent.setClass( this, InfoActivity.class );
+		intent.setClass( this, EventsActivity.class );
 		
-		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_event ) );
-		tabSpec.setIndicator( res.getString( R.string.tab_event_label ), res.getDrawable( R.drawable.ic_tab_event ) );
+		tabSpec = tabHost.newTabSpec( res.getString( R.string.tab_events ) );
+		tabSpec.setIndicator( res.getString( R.string.tab_events_label ), res.getDrawable( R.drawable.ic_tab_event ) );
 		tabSpec.setContent( intent );
 		tabHost.addTab( tabSpec );
 
-		// add events tab
+		//add schedule tab
 		intent = new Intent();
 		intent.setClass( this, EventActivity.class );
 		
