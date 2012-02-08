@@ -26,8 +26,8 @@ import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleActivity;
 import org.openschedule.api.Event;
 import org.openschedule.api.Speaker;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,29 +72,31 @@ public class SpeakerActivity extends AbstractOpenScheduleActivity {
 		listView.setOnItemClickListener( new OnItemClickListener() {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 		    	
-				Speaker speaker = getApplicationContext().getSelectedSpeaker();
-				switch( position ) {
+		    	try {
+		    		Intent intent = new Intent();
+
+		    		Speaker speaker = getApplicationContext().getSelectedSpeaker();
+		    		switch( position ) {
 		    		case 0:
 		    			Log.d( TAG, "display biography" );
 
 		    			if( null != speaker.getBio() && !"".equals( speaker.getBio() ) ) {
-		    				NavigationManager.startActivity( view.getContext(), SpeakerBiographyActivity.class );
+		    				intent.setClass( view.getContext(), SpeakerBiographyActivity.class );
 		    			} else {
 		    				Toast toast = Toast.makeText( view.getContext(), "The speaker has not provided a biography.", Toast.LENGTH_LONG );
 		    				toast.setGravity( Gravity.CENTER, 0, 0 );
 		    				toast.show();
 		    			}
-		    			
+
 		    			break;
-			      	case 1:
-			      		Log.d( TAG, "display web site in browser" );
+		    		case 1:
+		    			Log.d( TAG, "display web site in browser" );
 
 		    			if( null != speaker.getWebSite() && !"".equals( speaker.getWebSite() ) ) {
 		    				Uri uri = Uri.parse( speaker.getWebSite() );
-		    				Intent intent = new Intent( Intent.ACTION_VIEW, uri );
+		    				intent = new Intent( Intent.ACTION_VIEW, uri );
 
 		    				Log.v( TAG, "starting display web site intent" );
-		    				NavigationManager.startActivity( view.getContext(), intent );
 		    			} else {
 		    				Toast toast = Toast.makeText( view.getContext(), "The speaker has not provided a web site.", Toast.LENGTH_LONG );
 		    				toast.setGravity( Gravity.CENTER, 0, 0 );
@@ -102,19 +104,18 @@ public class SpeakerActivity extends AbstractOpenScheduleActivity {
 		    			}
 
 		    			break;
-			      	case 2:
-			      		Log.d( TAG, "send email" );
+		    		case 2:
+		    			Log.d( TAG, "send email" );
 
 		    			if( null != speaker.getEmail() && !"".equals( speaker.getEmail() ) ) {
 		    				Event event = getApplicationContext().getSelectedEvent();
-		    				
-		    				Intent intent = new Intent( Intent.ACTION_SEND );
+
+		    				intent = new Intent( Intent.ACTION_SEND );
 		    				intent.putExtra( Intent.EXTRA_EMAIL, new String[] { speaker.getEmail() } );
 		    				intent.putExtra( Intent.EXTRA_SUBJECT, event.getName() );
 		    				intent.setType( "plain/text" );
-		    				
+
 		    				Log.v( TAG, "starting send email intent" );
-		    				NavigationManager.startActivity( view.getContext(), intent );
 		    			} else {
 		    				Toast toast = Toast.makeText( view.getContext(), "The speaker has not provided an email.", Toast.LENGTH_LONG );
 		    				toast.setGravity( Gravity.CENTER, 0, 0 );
@@ -122,9 +123,14 @@ public class SpeakerActivity extends AbstractOpenScheduleActivity {
 		    			}
 
 		    			break;
-			      	default:
-			      		Log.d( TAG, "default option" );
-			      		break;
+		    		default:
+		    			Log.d( TAG, "default option" );
+		    			break;
+		    		}
+
+		    		startActivity( intent );
+		    	} catch( ActivityNotFoundException e ) {
+		    		Log.w( TAG, "onItemClick : no activity specified" );
 		    	}
 		    }
 		});
@@ -172,7 +178,9 @@ public class SpeakerActivity extends AbstractOpenScheduleActivity {
 	    // Handle item selection
 	    switch( item.getItemId() ) {
 	    case R.id.about_menu:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

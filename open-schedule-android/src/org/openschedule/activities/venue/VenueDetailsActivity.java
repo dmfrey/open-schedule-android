@@ -26,8 +26,8 @@ import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleActivity;
 import org.openschedule.api.Event;
 import org.openschedule.api.Venue;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -74,72 +74,72 @@ public class VenueDetailsActivity extends AbstractOpenScheduleActivity {
 		listView.setOnItemClickListener( new OnItemClickListener() {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 		    	
-		    	PackageManager pm = view.getContext().getPackageManager();
-		    	
-				Venue venue = getApplicationContext().getSelectedVenue();
-				switch( position ) {
+		    	try {
+		    		PackageManager pm = view.getContext().getPackageManager();
+
+		    		Intent intent = new Intent();
+
+		    		Venue venue = getApplicationContext().getSelectedVenue();
+		    		switch( position ) {
 		    		case 0:
 		    			Log.d( TAG, "display web site in browser" );
 
 		    			if( null != venue.getWebSite() && !"".equals( venue.getWebSite() ) ) {
 		    				Uri uri = Uri.parse( venue.getWebSite() );
-		    				Intent intent = new Intent( Intent.ACTION_VIEW, uri );
+		    				intent = new Intent( Intent.ACTION_VIEW, uri );
 
 		    				Log.v( TAG, "starting display web site intent" );
-		    				NavigationManager.startActivity( view.getContext(), intent );
 		    			} else {
 		    				Toast toast = Toast.makeText( view.getContext(), "The venue does not have a web site defined.", Toast.LENGTH_LONG );
 		    				toast.setGravity( Gravity.CENTER, 0, 0 );
 		    				toast.show();
 		    			}
-		    			
+
 		    			break;
-			      	case 1:
-			      		Log.d( TAG, "initiate phone call" );
+		    		case 1:
+		    			Log.d( TAG, "initiate phone call" );
 
-			      		if( pm.hasSystemFeature( PackageManager.FEATURE_TELEPHONY ) ) {
-			      			Log.d( TAG, "device can place calls" );
-			      			
-			      			if( null != venue.getPhone() && !"".equals( venue.getPhone() ) ) {
-			      				String phone = venue.getPhone();
-			      				phone = phone.replace( "(", "" );
-			      				phone = phone.replace( ")", "" );
-			      				phone = phone.replace( "-", "" );
-			      				phone = phone.replace( ".", "" );
-			      				phone = phone.replace( " ", "" );
+		    			if( pm.hasSystemFeature( PackageManager.FEATURE_TELEPHONY ) ) {
+		    				Log.d( TAG, "device can place calls" );
 
-			      				Uri uri = Uri.parse( "tel:" + phone );
-			      				Intent intent = new Intent( Intent.ACTION_DIAL, uri );
+		    				if( null != venue.getPhone() && !"".equals( venue.getPhone() ) ) {
+		    					String phone = venue.getPhone();
+		    					phone = phone.replace( "(", "" );
+		    					phone = phone.replace( ")", "" );
+		    					phone = phone.replace( "-", "" );
+		    					phone = phone.replace( ".", "" );
+		    					phone = phone.replace( " ", "" );
 
-			      				Log.v( TAG, "starting intiate phone call intent" );
-			      				NavigationManager.startActivity( view.getContext(), intent );
-			      			} else {
-			      				Toast toast = Toast.makeText( view.getContext(), "The venue does not have phone number specified.", Toast.LENGTH_LONG );
-			      				toast.setGravity( Gravity.CENTER, 0, 0 );
-			      				toast.show();
-			      			}
-			      		} else {
-			      			Log.d( TAG, "device can not place calls" );
+		    					Uri uri = Uri.parse( "tel:" + phone );
+		    					intent = new Intent( Intent.ACTION_DIAL, uri );
 
-			      			Toast toast = Toast.makeText( view.getContext(), "Your device can not place phone calls.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
-			      		}
-			      		
+		    					Log.v( TAG, "starting intiate phone call intent" );
+		    				} else {
+		    					Toast toast = Toast.makeText( view.getContext(), "The venue does not have phone number specified.", Toast.LENGTH_LONG );
+		    					toast.setGravity( Gravity.CENTER, 0, 0 );
+		    					toast.show();
+		    				}
+		    			} else {
+		    				Log.d( TAG, "device can not place calls" );
+
+		    				Toast toast = Toast.makeText( view.getContext(), "Your device can not place phone calls.", Toast.LENGTH_LONG );
+		    				toast.setGravity( Gravity.CENTER, 0, 0 );
+		    				toast.show();
+		    			}
+
 		    			break;
-			      	case 2:
-			      		Log.d( TAG, "send email" );
+		    		case 2:
+		    			Log.d( TAG, "send email" );
 
 		    			if( null != venue.getEmail() && !"".equals( venue.getEmail() ) ) {
 		    				Event event = getApplicationContext().getSelectedEvent();
-		    				
-		    				Intent intent = new Intent( Intent.ACTION_SEND );
+
+		    				intent = new Intent( Intent.ACTION_SEND );
 		    				intent.putExtra( Intent.EXTRA_EMAIL, new String[] { venue.getEmail() } );
 		    				intent.putExtra( Intent.EXTRA_SUBJECT, event.getName() );
 		    				intent.setType( "plain/text" );
-		    				
+
 		    				Log.v( TAG, "starting send email intent" );
-		    				NavigationManager.startActivity( view.getContext(), intent );
 		    			} else {
 		    				Toast toast = Toast.makeText( view.getContext(), "The venue does not have an email address defined.", Toast.LENGTH_LONG );
 		    				toast.setGravity( Gravity.CENTER, 0, 0 );
@@ -147,37 +147,41 @@ public class VenueDetailsActivity extends AbstractOpenScheduleActivity {
 		    			}
 
 		    			break;
-			      	case 3:
-			      		Log.d( TAG, "navigate to venue" );
+		    		case 3:
+		    			Log.d( TAG, "navigate to venue" );
 
-			      		if( Build.VERSION.SDK_INT > 4 ) {
-			      			if( ( null != venue.getAddressOne() && !"".equals( venue.getAddressOne() ) ) ||
-			      					( null != venue.getCity() && !"".equals( venue.getCity() ) ) ||
-			      					( null != venue.getState() && !"".equals( venue.getState() ) ) ||
-			      					( null != venue.getZip() && !"".equals( venue.getZip() ) )
-			      			) {
-			      				String address = venue.getAddressOne() + "+" + venue.getCity() + "+" + venue.getState() + "+" + venue.getZip();
+		    			if( Build.VERSION.SDK_INT > 4 ) {
+		    				if( ( null != venue.getAddressOne() && !"".equals( venue.getAddressOne() ) ) ||
+		    						( null != venue.getCity() && !"".equals( venue.getCity() ) ) ||
+		    						( null != venue.getState() && !"".equals( venue.getState() ) ) ||
+		    						( null != venue.getZip() && !"".equals( venue.getZip() ) )
+		    						) {
+		    					String address = venue.getAddressOne() + "+" + venue.getCity() + "+" + venue.getState() + "+" + venue.getZip();
 
-			      				Uri uri = Uri.parse( "geo:0,0?q=" + address );
-			      				Intent intent = new Intent( Intent.ACTION_VIEW, uri );
+		    					Uri uri = Uri.parse( "geo:0,0?q=" + address );
+		    					intent = new Intent( Intent.ACTION_VIEW, uri );
 
-			      				Log.v( TAG, "starting navigate intent" );
-			      				NavigationManager.startActivity( view.getContext(), intent );
-			      			} else {
-			      				Toast toast = Toast.makeText( view.getContext(), "The address for this venue has not been specified.", Toast.LENGTH_LONG );
-			      				toast.setGravity( Gravity.CENTER, 0, 0 );
-			      				toast.show();
-			      			}
-			      		} else {
-		      				Toast toast = Toast.makeText( view.getContext(), "Navigation is only available on Android 2.1 and above.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
-			      		}
-			      		
-			      		break;
-			      	default:
-			      		Log.d( TAG, "default option" );
-			      		break;
+		    					Log.v( TAG, "starting navigate intent" );
+		    				} else {
+		    					Toast toast = Toast.makeText( view.getContext(), "The address for this venue has not been specified.", Toast.LENGTH_LONG );
+		    					toast.setGravity( Gravity.CENTER, 0, 0 );
+		    					toast.show();
+		    				}
+		    			} else {
+		    				Toast toast = Toast.makeText( view.getContext(), "Navigation is only available on Android 2.1 and above.", Toast.LENGTH_LONG );
+		    				toast.setGravity( Gravity.CENTER, 0, 0 );
+		    				toast.show();
+		    			}
+
+		    			break;
+		    		default:
+		    			Log.d( TAG, "default option" );
+		    			break;
+		    		}
+
+		    		startActivity( intent );
+		    	} catch( ActivityNotFoundException e ) {
+		    		Log.w( TAG, "onItemClick : no activity specified" );
 		    	}
 		    }
 		});
@@ -214,7 +218,9 @@ public class VenueDetailsActivity extends AbstractOpenScheduleActivity {
 	    // Handle item selection
 	    switch( item.getItemId() ) {
 	    case R.id.about_menu:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

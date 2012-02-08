@@ -30,11 +30,12 @@ import org.openschedule.R;
 import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleActivity;
 import org.openschedule.api.Event;
-import org.openschedule.controllers.NavigationManager;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -90,47 +91,53 @@ public class EventsActivity extends AbstractOpenScheduleActivity {
 
       			if( null != event ) {
       				
-      				Calendar now = Calendar.getInstance();
+      				try {
+      					Calendar now = Calendar.getInstance();
 
-      				Calendar startTime = Calendar.getInstance();
-      				startTime.setTime( event.getStartDate() );
+      					Calendar startTime = Calendar.getInstance();
+      					startTime.setTime( event.getStartDate() );
 
-      				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
-      				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
-      				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
+      					Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
+      					Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
+      					Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
 
-      				switch( position ) {
-      				case 0:
-      					Log.d( TAG, "add comment" );
+      					Intent intent = new Intent();
+      					switch( position ) {
+      					case 0:
+      						Log.d( TAG, "add comment" );
 
-      					if( now.after( startTime ) ) {
-      						Log.d( TAG, "adding comments are enabled, the event has started" );
+      						if( now.after( startTime ) ) {
+      							Log.d( TAG, "adding comments are enabled, the event has started" );
 
-      						NavigationManager.startActivity( view.getContext(), EventCommentFormActivity.class );
-      					} else {
-      						Log.d( TAG, "adding comments is disabled, the event has not started" );
+      							intent.setClass( view.getContext(), EventCommentFormActivity.class );
+      						} else {
+      							Log.d( TAG, "adding comments is disabled, the event has not started" );
 
-      						Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
-      						toast.setGravity( Gravity.CENTER, 0, 0 );
-      						toast.show();
+      							Toast toast = Toast.makeText( view.getContext(), "Event has not started yet, Comments are only available after the event has started.", Toast.LENGTH_LONG );
+      							toast.setGravity( Gravity.CENTER, 0, 0 );
+      							toast.show();
+      						}
+
+      						break;
+      					case 1:
+      						Log.d( TAG, "view comments" );
+
+      						intent.setClass( view.getContext(), EventCommentsActivity.class );
+      						break;
+      					case 2:
+      						Log.d( TAG, "view notifications" );
+
+      						intent.setClass( view.getContext(), NotificationsActivity.class );
+      						break;
+      					default:
+      						Log.d( TAG, "default option" );
+      						break;
       					}
 
-      					break;
-      				case 1:
-      					Log.d( TAG, "view comments" );
-
-      					NavigationManager.startActivity( view.getContext(), EventCommentsActivity.class );
-      					break;
-      				case 2:
-      					Log.d( TAG, "view notifications" );
-
-      					NavigationManager.startActivity( view.getContext(), NotificationsActivity.class );
-      					break;
-      				default:
-      					Log.d( TAG, "default option" );
-      					break;
-      				}
-
+      					startActivity( intent );
+    		    	} catch( ActivityNotFoundException e ) {
+    		    		Log.w( TAG, "onItemClick : no activity specified" );
+    		    	}
 				} else {
 					Log.d( TAG, "no event selected" );
 
@@ -193,7 +200,9 @@ public class EventsActivity extends AbstractOpenScheduleActivity {
 		    Log.d( TAG, "onOptionsItemSelected : exit, select option selected" );
 		    return true;
 	    case R.id.events_menu_about:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

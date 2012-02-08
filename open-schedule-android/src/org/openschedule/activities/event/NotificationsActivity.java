@@ -12,8 +12,8 @@ import org.openschedule.R;
 import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleListActivity;
 import org.openschedule.api.Notification;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -78,7 +78,9 @@ public class NotificationsActivity extends AbstractOpenScheduleListActivity {
 		Notification notification = currentNotifications.get( position );
 		getApplicationContext().setSelectedNotification( notification );
 		
-		NavigationManager.startActivity( v.getContext(), NotificationDetailsActivity.class );
+		Intent intent = new Intent();
+		intent.setClass( this, NotificationDetailsActivity.class );
+		startActivity( intent );
 
 		Log.d( TAG, "onListItemClick : exit" );
 	}
@@ -107,7 +109,9 @@ public class NotificationsActivity extends AbstractOpenScheduleListActivity {
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
 	    	return true;
 	    case R.id.notifications_menu_about:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;
