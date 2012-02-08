@@ -28,6 +28,10 @@ import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.widget.TextView;
 
+/**
+ * @author Daniel Frey
+ *
+ */
 public class AboutActivity extends AbstractOpenScheduleActivity {
 
 	private static final String TAG = AboutActivity.class.getSimpleName();

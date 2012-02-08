@@ -45,7 +45,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class EventActivity extends AbstractOpenScheduleListActivity {

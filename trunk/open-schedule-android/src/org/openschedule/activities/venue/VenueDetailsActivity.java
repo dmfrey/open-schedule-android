@@ -47,7 +47,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class VenueDetailsActivity extends AbstractOpenScheduleActivity {

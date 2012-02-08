@@ -26,6 +26,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * @author Daniel Frey
+ *
+ */
 public class Day {
 
 	private Integer id;

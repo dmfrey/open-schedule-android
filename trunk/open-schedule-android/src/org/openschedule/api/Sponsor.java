@@ -21,7 +21,10 @@
  */
 package org.openschedule.api;
 
-
+/**
+ * @author Daniel Frey
+ *
+ */
 public class Sponsor {
 	
 	private Integer id;

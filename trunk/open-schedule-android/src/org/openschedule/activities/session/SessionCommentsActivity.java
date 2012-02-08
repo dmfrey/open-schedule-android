@@ -41,7 +41,7 @@ import android.view.MenuItem;
 import android.widget.SimpleAdapter;
 
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class SessionCommentsActivity extends AbstractOpenScheduleListActivity {
