@@ -25,8 +25,8 @@ import org.openschedule.R;
 import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleActivity;
 import org.openschedule.api.Speaker;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -96,7 +96,9 @@ public class SpeakerBiographyActivity extends AbstractOpenScheduleActivity {
 	    // Handle item selection
 	    switch( item.getItemId() ) {
 	    case R.id.about_menu:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

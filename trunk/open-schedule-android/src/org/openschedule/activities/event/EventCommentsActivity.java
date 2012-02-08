@@ -30,8 +30,8 @@ import org.openschedule.R;
 import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleListActivity;
 import org.openschedule.api.Comment;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -104,7 +104,9 @@ public class EventCommentsActivity extends AbstractOpenScheduleListActivity {
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
 	    	return true;
 	    case R.id.comments_menu_about:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

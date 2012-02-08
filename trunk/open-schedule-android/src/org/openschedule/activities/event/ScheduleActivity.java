@@ -31,8 +31,8 @@ import org.openschedule.activities.AbstractOpenScheduleListActivity;
 import org.openschedule.activities.session.SessionActivity;
 import org.openschedule.api.Block;
 import org.openschedule.api.Schedule;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -77,7 +77,9 @@ public class ScheduleActivity extends AbstractOpenScheduleListActivity {
 		getApplicationContext().setSelectedBlock( block );
 		
 		if( null != block.getLabel() && null != block.getSession() ) {
-			NavigationManager.startActivity( v.getContext(), SessionActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( v.getContext(), SessionActivity.class );
+			startActivity( intent );
 		}
 		
 		Log.d( TAG, "onListItemClick : exit" );

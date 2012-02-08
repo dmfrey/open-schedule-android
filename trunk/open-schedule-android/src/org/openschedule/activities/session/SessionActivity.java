@@ -34,9 +34,10 @@ import org.openschedule.api.Day;
 import org.openschedule.api.Event;
 import org.openschedule.api.Schedule;
 import org.openschedule.api.Speaker;
-import org.openschedule.controllers.NavigationManager;
 
+import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -80,186 +81,192 @@ public class SessionActivity extends AbstractOpenScheduleActivity {
 		    public void onItemClick( AdapterView<?> parent, View view, int position, long id ) {
 	      		Log.d( TAG, "onItemClick : enter" );
 		    	
-		    	Day day = getApplicationContext().getSelectedDay();
-      			Block block = getApplicationContext().getSelectedBlock();
+	      		try {
+	      			Day day = getApplicationContext().getSelectedDay();
+	      			Block block = getApplicationContext().getSelectedBlock();
 
-      			Calendar now = Calendar.getInstance();
-      			
-  				Calendar startTime = Calendar.getInstance();
-  				startTime.setTime( day.getDate() );
-  				StringTokenizer st = new StringTokenizer( block.getLabel().getName(), ":" );
-  				int hour = Integer.parseInt( st.nextToken() );
-  				int minute = Integer.parseInt( st.nextToken() );
-  				startTime.set( Calendar.HOUR_OF_DAY, hour );
-  				startTime.set( Calendar.MINUTE, minute );
+	      			Calendar now = Calendar.getInstance();
 
-  				Calendar endTime = Calendar.getInstance();
-  				endTime.setTime( startTime.getTime() );
-  				endTime.add( Calendar.MINUTE, block.getDuration() );
+	      			Calendar startTime = Calendar.getInstance();
+	      			startTime.setTime( day.getDate() );
+	      			StringTokenizer st = new StringTokenizer( block.getLabel().getName(), ":" );
+	      			int hour = Integer.parseInt( st.nextToken() );
+	      			int minute = Integer.parseInt( st.nextToken() );
+	      			startTime.set( Calendar.HOUR_OF_DAY, hour );
+	      			startTime.set( Calendar.MINUTE, minute );
 
-				Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
-				Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
-				Log.d( TAG, "endTime=" + endTime.get( Calendar.YEAR ) + "-" + ( endTime.get( Calendar.MONTH ) + 1 ) + "-" + endTime.get( Calendar.DATE ) + " " + endTime.get( Calendar.HOUR_OF_DAY ) + ":" + endTime.get( Calendar.MINUTE ) + ":" + endTime.get( Calendar.SECOND ) );
-				Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
+	      			Calendar endTime = Calendar.getInstance();
+	      			endTime.setTime( startTime.getTime() );
+	      			endTime.add( Calendar.MINUTE, block.getDuration() );
 
-  				switch( position ) {
-		    		case 0:
-		    			Log.d( TAG, "show Description" );
+	      			Log.d( TAG, "now=" + now.get( Calendar.YEAR ) + "-" + ( now.get( Calendar.MONTH ) + 1 ) + "-" + now.get( Calendar.DATE ) + " " + now.get( Calendar.HOUR_OF_DAY ) + ":" + now.get( Calendar.MINUTE ) + ":" + now.get( Calendar.SECOND ) );
+	      			Log.d( TAG, "startTime=" + startTime.get( Calendar.YEAR ) + "-" + ( startTime.get( Calendar.MONTH ) + 1 ) + "-" + startTime.get( Calendar.DATE ) + " " + startTime.get( Calendar.HOUR_OF_DAY ) + ":" + startTime.get( Calendar.MINUTE ) + ":" + startTime.get( Calendar.SECOND ) );
+	      			Log.d( TAG, "endTime=" + endTime.get( Calendar.YEAR ) + "-" + ( endTime.get( Calendar.MONTH ) + 1 ) + "-" + endTime.get( Calendar.DATE ) + " " + endTime.get( Calendar.HOUR_OF_DAY ) + ":" + endTime.get( Calendar.MINUTE ) + ":" + endTime.get( Calendar.SECOND ) );
+	      			Log.d( TAG, "now after startTime? : " + ( now.after( startTime ) ) );
 
-		    			NavigationManager.startActivity( view.getContext(), SessionDescriptionActivity.class );
-		    			break;
-			      	case 1:
-			      		Log.d( TAG, "show Speakers" );
+	      			Intent intent = new Intent();
+	      			switch( position ) {
+	      			case 0:
+	      				Log.d( TAG, "show Description" );
 
-			      		if( null != block ) {
-			      			if( null != block.getSession() ) {
-			      				if( null != block.getSession().getSpeakers() && !block.getSession().getSpeakers().isEmpty() ) {
-			      					if( block.getSession().getSpeakers().size() > 1 ) {
-			      						NavigationManager.startActivity( view.getContext(), SpeakersActivity.class );
-			      					} else {
-			      						getApplicationContext().setSelectedSpeaker( block.getSession().getSpeakers().get( 0 ) );
-			      						NavigationManager.startActivity( view.getContext(), SpeakerActivity.class );
-			      					}
-			      				} else {
-				      				Toast toast = Toast.makeText( view.getContext(), "This Session has no speakers.", Toast.LENGTH_LONG );
-				      				toast.setGravity( Gravity.CENTER, 0, 0 );
-				      				toast.show();
-			      				}
-			      			}
-			      		}
-			      		break;
-			      	case 2:
-			      		Log.d( TAG, "view comments" );
-			      		
-		    			NavigationManager.startActivity( view.getContext(), SessionCommentsActivity.class );
-			      		break;
-			      	case 3:
-			      		Log.d( TAG, "send tweet" );
+	      				intent.setClass( view.getContext(), SessionDescriptionActivity.class );
+	      				break;
+	      			case 1:
+	      				Log.d( TAG, "show Speakers" );
+
+	      				if( null != block ) {
+	      					if( null != block.getSession() ) {
+	      						if( null != block.getSession().getSpeakers() && !block.getSession().getSpeakers().isEmpty() ) {
+	      							if( block.getSession().getSpeakers().size() > 1 ) {
+	      								intent.setClass( view.getContext(), SpeakersActivity.class );
+	      							} else {
+	      								getApplicationContext().setSelectedSpeaker( block.getSession().getSpeakers().get( 0 ) );
+	      								intent.setClass( view.getContext(), SpeakerActivity.class );
+	      							}
+	      						} else {
+	      							Toast toast = Toast.makeText( view.getContext(), "This Session has no speakers.", Toast.LENGTH_LONG );
+	      							toast.setGravity( Gravity.CENTER, 0, 0 );
+	      							toast.show();
+	      						}
+	      					}
+	      				}
+	      				break;
+	      			case 2:
+	      				Log.d( TAG, "view comments" );
+
+	      				intent.setClass( view.getContext(), SessionCommentsActivity.class );
+	      				break;
+	      			case 3:
+	      				Log.d( TAG, "send tweet" );
 
 	      				if( now.before( startTime ) ) {
-	      				    Log.d( TAG, "sendTweet : tweeting is disabled, session has not started yet." );
+	      					Log.d( TAG, "sendTweet : tweeting is disabled, session has not started yet." );
 
-		      				Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, tweeting is only available during the session.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
+	      					Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, tweeting is only available during the session.", Toast.LENGTH_LONG );
+	      					toast.setGravity( Gravity.CENTER, 0, 0 );
+	      					toast.show();
 	      				} else if( now.after( endTime ) ) {
-	      				    Log.d( TAG, "sendTweet : tweeting is disabled, session has ended." );
+	      					Log.d( TAG, "sendTweet : tweeting is disabled, session has ended." );
 
-		      				Toast toast = Toast.makeText( view.getContext(), "Session has ended, tweeting is only available during the session.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
+	      					Toast toast = Toast.makeText( view.getContext(), "Session has ended, tweeting is only available during the session.", Toast.LENGTH_LONG );
+	      					toast.setGravity( Gravity.CENTER, 0, 0 );
+	      					toast.show();
 	      				}
-			      		break;
-			      	case 4:
-			      		Log.d( TAG, "add to calendar" );
+	      				break;
+	      			case 4:
+	      				Log.d( TAG, "add to calendar" );
 
-		      			Event event = getApplicationContext().getSelectedEvent();
-		      			Schedule schedule = getApplicationContext().getSelectedSchedule();
+	      				Event event = getApplicationContext().getSelectedEvent();
+	      				Schedule schedule = getApplicationContext().getSelectedSchedule();
 
-		      			if( null != block.getSession() ) {
-		      				String[] projection = new String[] { "_id" };
-		      				String contentUri = "content://calendar/calendars";
-		      				if( Build.VERSION.SDK_INT > 7 ) {
-			      				Log.v( TAG, "switching calendar to android 2.2 and greater model" );
+	      				if( null != block.getSession() ) {
+	      					String[] projection = new String[] { "_id" };
+	      					String contentUri = "content://calendar/calendars";
+	      					if( Build.VERSION.SDK_INT > 7 ) {
+	      						Log.v( TAG, "switching calendar to android 2.2 and greater model" );
 
-			      				projection = new String[] { "_id" };
-		      					contentUri = "content://com.android.calendar/events";
-		      				}
-		      				Cursor cursor = managedQuery( Uri.parse( contentUri ), projection, "selected=1", null, null );
-		      				if( null == cursor ) {
-			      				Log.v( TAG, "cursor is null" );
+	      						projection = new String[] { "_id" };
+	      						contentUri = "content://com.android.calendar/events";
+	      					}
+	      					Cursor cursor = managedQuery( Uri.parse( contentUri ), projection, "selected=1", null, null );
+	      					if( null == cursor ) {
+	      						Log.v( TAG, "cursor is null" );
 
-			      				Toast toast = Toast.makeText( view.getContext(), "Could not add session to calendar.", Toast.LENGTH_LONG );
-			      				toast.setGravity( Gravity.CENTER, 0, 0 );
-			      				toast.show();
+	      						Toast toast = Toast.makeText( view.getContext(), "Could not add session to calendar.", Toast.LENGTH_LONG );
+	      						toast.setGravity( Gravity.CENTER, 0, 0 );
+	      						toast.show();
 
-			      				return;
-		      				}
-		      				cursor.moveToFirst();
-		      				int[] CalIds = new int[cursor.getCount()];
-		      				for (int i = 0; i < CalIds.length; i++) {
-		      				    CalIds[i] = cursor.getInt(0);
-		      				    cursor.moveToNext();
-		      				}
-		      				cursor.close();
-		      				
-		      				ContentValues contentValues = new ContentValues();
-		      				contentValues.put( "calendar_id", CalIds[ 0 ] );
+	      						return;
+	      					}
+	      					cursor.moveToFirst();
+	      					int[] CalIds = new int[cursor.getCount()];
+	      					for (int i = 0; i < CalIds.length; i++) {
+	      						CalIds[i] = cursor.getInt(0);
+	      						cursor.moveToNext();
+	      					}
+	      					cursor.close();
 
-		      				String title = event.getName();
-		      				if( null != block.getSession().getName() ) {
-		      					title += ": " + block.getSession().getName();
-		      				}
-		      				contentValues.put( "title", title  );
+	      					ContentValues contentValues = new ContentValues();
+	      					contentValues.put( "calendar_id", CalIds[ 0 ] );
 
-		      				String speakers = "Presented By: ";
-		      				boolean slash = false;
-		      				for( Speaker speaker : block.getSession().getSpeakers() ) {
-		      					if( slash ) {
-		      						speakers += " / ";
-		      					}
+	      					String title = event.getName();
+	      					if( null != block.getSession().getName() ) {
+	      						title += ": " + block.getSession().getName();
+	      					}
+	      					contentValues.put( "title", title  );
 
-		      					speakers += speaker.getName();
-		      					slash = true;
-		      				}
-		      				speakers += "\n\n";
+	      					String speakers = "Presented By: ";
+	      					boolean slash = false;
+	      					for( Speaker speaker : block.getSession().getSpeakers() ) {
+	      						if( slash ) {
+	      							speakers += " / ";
+	      						}
 
-		      				String description = "Description:\n";
-		      				description += block.getSession().getDescription();
-		      				contentValues.put( "description", ( speakers + description ) );
+	      						speakers += speaker.getName();
+	      						slash = true;
+	      					}
+	      					speakers += "\n\n";
 
-		      				String location = "";
-		      				if( null != schedule ) {
-		      					if( null != schedule.getTrack() ) {
-		      						location = schedule.getTrack().getName();
-		      						if( null != schedule.getTrack().getRoom() ) {
-		      							location += " - Room: " + schedule.getTrack().getRoom().getName(); 
-		      						}
-		      						contentValues.put( "eventLocation", location );
-		      					}
-		      				}
+	      					String description = "Description:\n";
+	      					description += block.getSession().getDescription();
+	      					contentValues.put( "description", ( speakers + description ) );
 
-		      				contentValues.put( "dtstart", startTime.getTimeInMillis() );
-		      				contentValues.put( "dtend", endTime.getTimeInMillis() );
-		      				
-		      				contentValues.put( "allDay", 0 );
-		      				contentValues.put( "eventStatus", 1 );
-		      				contentValues.put( "visibility", 0 );
-		      				contentValues.put( "transparency", 0 );
-		      				contentValues.put( "hasAlarm", 1 );
-		      				
-		      				Log.v( TAG, "adding event to calendar" );
-		      				getContentResolver().insert( Uri.parse( contentUri ), contentValues );
+	      					String location = "";
+	      					if( null != schedule ) {
+	      						if( null != schedule.getTrack() ) {
+	      							location = schedule.getTrack().getName();
+	      							if( null != schedule.getTrack().getRoom() ) {
+	      								location += " - Room: " + schedule.getTrack().getRoom().getName(); 
+	      							}
+	      							contentValues.put( "eventLocation", location );
+	      						}
+	      					}
 
-		      				Toast toast = Toast.makeText( view.getContext(), "Session added to your calendar.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
-		      			} else {
-		      				Toast toast = Toast.makeText( view.getContext(), "Could not add session to calendar.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
-		      			}
-			      		
-			      		break;
-			      	case 5:
-			      		Log.d( TAG, "add comment" );
-			      		
-	      				if( now.before( startTime ) ) {
-	      				    Log.d( TAG, "sendTweet : add comment is disabled, session has not started yet." );
+	      					contentValues.put( "dtstart", startTime.getTimeInMillis() );
+	      					contentValues.put( "dtend", endTime.getTimeInMillis() );
 
-		      				Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, Comments are only available after the session has started.", Toast.LENGTH_LONG );
-		      				toast.setGravity( Gravity.CENTER, 0, 0 );
-		      				toast.show();
+	      					contentValues.put( "allDay", 0 );
+	      					contentValues.put( "eventStatus", 1 );
+	      					contentValues.put( "visibility", 0 );
+	      					contentValues.put( "transparency", 0 );
+	      					contentValues.put( "hasAlarm", 1 );
+
+	      					Log.v( TAG, "adding event to calendar" );
+	      					getContentResolver().insert( Uri.parse( contentUri ), contentValues );
+
+	      					Toast toast = Toast.makeText( view.getContext(), "Session added to your calendar.", Toast.LENGTH_LONG );
+	      					toast.setGravity( Gravity.CENTER, 0, 0 );
+	      					toast.show();
 	      				} else {
-	      				    Log.d( TAG, "sendTweet : adding comment is enabled, session has started or is completed." );
-
-	      					NavigationManager.startActivity( view.getContext(), SessionCommentFormActivity.class );
+	      					Toast toast = Toast.makeText( view.getContext(), "Could not add session to calendar.", Toast.LENGTH_LONG );
+	      					toast.setGravity( Gravity.CENTER, 0, 0 );
+	      					toast.show();
 	      				}
-	      				
-			      		break;
-			      	default:
-			      		Log.d( TAG, "default option" );
-			      		break;
+
+	      				break;
+	      			case 5:
+	      				Log.d( TAG, "add comment" );
+
+	      				if( now.before( startTime ) ) {
+	      					Log.d( TAG, "sendTweet : add comment is disabled, session has not started yet." );
+
+	      					Toast toast = Toast.makeText( view.getContext(), "Session has not started yet, Comments are only available after the session has started.", Toast.LENGTH_LONG );
+	      					toast.setGravity( Gravity.CENTER, 0, 0 );
+	      					toast.show();
+	      				} else {
+	      					Log.d( TAG, "sendTweet : adding comment is enabled, session has started or is completed." );
+
+	      					intent.setClass( view.getContext(), SessionCommentFormActivity.class );
+	      				}
+
+	      				break;
+	      			default:
+	      				Log.d( TAG, "default option" );
+	      				break;
+	      			}
+	      			startActivity( intent );
+		    	} catch( ActivityNotFoundException e ) {
+		    		Log.w( TAG, "onItemClick : no activity specified" );
 		    	}
 
   				Log.d( TAG, "onItemClick : exit" );
@@ -310,7 +317,9 @@ public class SessionActivity extends AbstractOpenScheduleActivity {
 	    // Handle item selection
 	    switch( item.getItemId() ) {
 	    case R.id.about_menu:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, AboutActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;

@@ -29,11 +29,9 @@ import java.util.Map;
 
 import org.openschedule.MainApplication;
 import org.openschedule.R;
-import org.openschedule.activities.AboutActivity;
 import org.openschedule.activities.AbstractOpenScheduleListActivity;
 import org.openschedule.api.Day;
 import org.openschedule.api.Event;
-import org.openschedule.controllers.NavigationManager;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -132,7 +130,9 @@ public class EventActivity extends AbstractOpenScheduleListActivity {
 	    	Log.d( TAG, "onOptionsItemSelected : exit, refresh option selected" );
 	    	return true;
 	    case R.id.schedule_menu_about:
-	    	NavigationManager.startActivity( this, AboutActivity.class );
+			Intent intent = new Intent();
+			intent.setClass( this, DayActivity.class );
+			startActivity( intent );
 
 	    	Log.d( TAG, "onOptionsItemSelected : exit, about option selected" );
 	    	return true;
