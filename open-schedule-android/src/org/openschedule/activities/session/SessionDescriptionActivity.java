@@ -35,7 +35,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class SessionDescriptionActivity extends AbstractOpenScheduleActivity {

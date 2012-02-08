@@ -24,6 +24,10 @@ package org.openschedule.api;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Daniel Frey
+ *
+ */
 public class Session {
 
 	private Integer id;

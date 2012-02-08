@@ -21,7 +21,10 @@
  */
 package org.openschedule.api;
 
-
+/**
+ * @author Daniel Frey
+ *
+ */
 public class Speaker {
 
 	private Integer id;

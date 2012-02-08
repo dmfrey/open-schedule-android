@@ -35,12 +35,12 @@ import android.util.Log;
 import android.widget.TabHost;
 
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class MainTabWidget extends TabActivity {
 
-	private static final String TAG = "MainTabWidget";
+	private static final String TAG = MainTabWidget.class.getSimpleName();
 
 	//***************************************
     // Activity methods

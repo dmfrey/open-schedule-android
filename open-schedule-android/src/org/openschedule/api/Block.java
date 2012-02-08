@@ -24,6 +24,10 @@ package org.openschedule.api;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+ * @author Daniel Frey
+ *
+ */
 public class Block {
 
 	private Integer id;

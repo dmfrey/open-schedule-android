@@ -21,9 +21,8 @@
  */
 package org.openschedule.api;
 
-
 /**
- * @author dmfrey
+ * @author Daniel Frey
  *
  */
 public class Track {
